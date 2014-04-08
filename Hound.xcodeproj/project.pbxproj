@@ -1,0 +1,520 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		03DE2EA918F3B43300F634B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03DE2EA818F3B43300F634B1 /* Foundation.framework */; };
+		03DE2EAB18F3B43300F634B1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03DE2EAA18F3B43300F634B1 /* CoreGraphics.framework */; };
+		03DE2EAD18F3B43300F634B1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03DE2EAC18F3B43300F634B1 /* UIKit.framework */; };
+		03DE2EAF18F3B43300F634B1 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03DE2EAE18F3B43300F634B1 /* CoreData.framework */; };
+		03DE2EB518F3B43300F634B1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 03DE2EB318F3B43300F634B1 /* InfoPlist.strings */; };
+		03DE2EB718F3B43300F634B1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DE2EB618F3B43300F634B1 /* main.m */; };
+		03DE2EBB18F3B43300F634B1 /* houndAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DE2EBA18F3B43300F634B1 /* houndAppDelegate.m */; };
+		03DE2EBE18F3B43300F634B1 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03DE2EBC18F3B43300F634B1 /* Main_iPhone.storyboard */; };
+		03DE2EC118F3B43300F634B1 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03DE2EBF18F3B43300F634B1 /* Main_iPad.storyboard */; };
+		03DE2EC418F3B43300F634B1 /* Hound.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 03DE2EC218F3B43300F634B1 /* Hound.xcdatamodeld */; };
+		03DE2EC718F3B43300F634B1 /* houndMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DE2EC618F3B43300F634B1 /* houndMasterViewController.m */; };
+		03DE2ECA18F3B43300F634B1 /* houndDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DE2EC918F3B43300F634B1 /* houndDetailViewController.m */; };
+		03DE2ECC18F3B43300F634B1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03DE2ECB18F3B43300F634B1 /* Images.xcassets */; };
+		03DE2ED318F3B43300F634B1 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03DE2ED218F3B43300F634B1 /* XCTest.framework */; };
+		03DE2ED418F3B43300F634B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03DE2EA818F3B43300F634B1 /* Foundation.framework */; };
+		03DE2ED518F3B43300F634B1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03DE2EAC18F3B43300F634B1 /* UIKit.framework */; };
+		03DE2ED618F3B43300F634B1 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03DE2EAE18F3B43300F634B1 /* CoreData.framework */; };
+		03DE2EDE18F3B43300F634B1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 03DE2EDC18F3B43300F634B1 /* InfoPlist.strings */; };
+		03DE2EE018F3B43300F634B1 /* HoundTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DE2EDF18F3B43300F634B1 /* HoundTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		03DE2ED718F3B43300F634B1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 03DE2E9D18F3B43300F634B1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 03DE2EA418F3B43300F634B1;
+			remoteInfo = Hound;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		03DE2EA518F3B43300F634B1 /* Hound.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hound.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		03DE2EA818F3B43300F634B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		03DE2EAA18F3B43300F634B1 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		03DE2EAC18F3B43300F634B1 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		03DE2EAE18F3B43300F634B1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		03DE2EB218F3B43300F634B1 /* Hound-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Hound-Info.plist"; sourceTree = "<group>"; };
+		03DE2EB418F3B43300F634B1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		03DE2EB618F3B43300F634B1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		03DE2EB818F3B43300F634B1 /* Hound-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Hound-Prefix.pch"; sourceTree = "<group>"; };
+		03DE2EB918F3B43300F634B1 /* houndAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = houndAppDelegate.h; sourceTree = "<group>"; };
+		03DE2EBA18F3B43300F634B1 /* houndAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = houndAppDelegate.m; sourceTree = "<group>"; };
+		03DE2EBD18F3B43300F634B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
+		03DE2EC018F3B43300F634B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
+		03DE2EC318F3B43300F634B1 /* Hound.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Hound.xcdatamodel; sourceTree = "<group>"; };
+		03DE2EC518F3B43300F634B1 /* houndMasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = houndMasterViewController.h; sourceTree = "<group>"; };
+		03DE2EC618F3B43300F634B1 /* houndMasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = houndMasterViewController.m; sourceTree = "<group>"; };
+		03DE2EC818F3B43300F634B1 /* houndDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = houndDetailViewController.h; sourceTree = "<group>"; };
+		03DE2EC918F3B43300F634B1 /* houndDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = houndDetailViewController.m; sourceTree = "<group>"; };
+		03DE2ECB18F3B43300F634B1 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		03DE2ED118F3B43300F634B1 /* HoundTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HoundTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		03DE2ED218F3B43300F634B1 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		03DE2EDB18F3B43300F634B1 /* HoundTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "HoundTests-Info.plist"; sourceTree = "<group>"; };
+		03DE2EDD18F3B43300F634B1 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		03DE2EDF18F3B43300F634B1 /* HoundTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HoundTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		03DE2EA218F3B43300F634B1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				03DE2EAB18F3B43300F634B1 /* CoreGraphics.framework in Frameworks */,
+				03DE2EAF18F3B43300F634B1 /* CoreData.framework in Frameworks */,
+				03DE2EAD18F3B43300F634B1 /* UIKit.framework in Frameworks */,
+				03DE2EA918F3B43300F634B1 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		03DE2ECE18F3B43300F634B1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				03DE2ED318F3B43300F634B1 /* XCTest.framework in Frameworks */,
+				03DE2ED618F3B43300F634B1 /* CoreData.framework in Frameworks */,
+				03DE2ED518F3B43300F634B1 /* UIKit.framework in Frameworks */,
+				03DE2ED418F3B43300F634B1 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		03DE2E9C18F3B43300F634B1 = {
+			isa = PBXGroup;
+			children = (
+				03DE2EB018F3B43300F634B1 /* Hound */,
+				03DE2ED918F3B43300F634B1 /* HoundTests */,
+				03DE2EA718F3B43300F634B1 /* Frameworks */,
+				03DE2EA618F3B43300F634B1 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		03DE2EA618F3B43300F634B1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				03DE2EA518F3B43300F634B1 /* Hound.app */,
+				03DE2ED118F3B43300F634B1 /* HoundTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		03DE2EA718F3B43300F634B1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				03DE2EA818F3B43300F634B1 /* Foundation.framework */,
+				03DE2EAA18F3B43300F634B1 /* CoreGraphics.framework */,
+				03DE2EAC18F3B43300F634B1 /* UIKit.framework */,
+				03DE2EAE18F3B43300F634B1 /* CoreData.framework */,
+				03DE2ED218F3B43300F634B1 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		03DE2EB018F3B43300F634B1 /* Hound */ = {
+			isa = PBXGroup;
+			children = (
+				03DE2EB918F3B43300F634B1 /* houndAppDelegate.h */,
+				03DE2EBA18F3B43300F634B1 /* houndAppDelegate.m */,
+				03DE2EBC18F3B43300F634B1 /* Main_iPhone.storyboard */,
+				03DE2EBF18F3B43300F634B1 /* Main_iPad.storyboard */,
+				03DE2EC518F3B43300F634B1 /* houndMasterViewController.h */,
+				03DE2EC618F3B43300F634B1 /* houndMasterViewController.m */,
+				03DE2EC818F3B43300F634B1 /* houndDetailViewController.h */,
+				03DE2EC918F3B43300F634B1 /* houndDetailViewController.m */,
+				03DE2ECB18F3B43300F634B1 /* Images.xcassets */,
+				03DE2EC218F3B43300F634B1 /* Hound.xcdatamodeld */,
+				03DE2EB118F3B43300F634B1 /* Supporting Files */,
+			);
+			path = Hound;
+			sourceTree = "<group>";
+		};
+		03DE2EB118F3B43300F634B1 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				03DE2EB218F3B43300F634B1 /* Hound-Info.plist */,
+				03DE2EB318F3B43300F634B1 /* InfoPlist.strings */,
+				03DE2EB618F3B43300F634B1 /* main.m */,
+				03DE2EB818F3B43300F634B1 /* Hound-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		03DE2ED918F3B43300F634B1 /* HoundTests */ = {
+			isa = PBXGroup;
+			children = (
+				03DE2EDF18F3B43300F634B1 /* HoundTests.m */,
+				03DE2EDA18F3B43300F634B1 /* Supporting Files */,
+			);
+			path = HoundTests;
+			sourceTree = "<group>";
+		};
+		03DE2EDA18F3B43300F634B1 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				03DE2EDB18F3B43300F634B1 /* HoundTests-Info.plist */,
+				03DE2EDC18F3B43300F634B1 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		03DE2EA418F3B43300F634B1 /* Hound */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 03DE2EE318F3B43300F634B1 /* Build configuration list for PBXNativeTarget "Hound" */;
+			buildPhases = (
+				03DE2EA118F3B43300F634B1 /* Sources */,
+				03DE2EA218F3B43300F634B1 /* Frameworks */,
+				03DE2EA318F3B43300F634B1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Hound;
+			productName = Hound;
+			productReference = 03DE2EA518F3B43300F634B1 /* Hound.app */;
+			productType = "com.apple.product-type.application";
+		};
+		03DE2ED018F3B43300F634B1 /* HoundTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 03DE2EE618F3B43300F634B1 /* Build configuration list for PBXNativeTarget "HoundTests" */;
+			buildPhases = (
+				03DE2ECD18F3B43300F634B1 /* Sources */,
+				03DE2ECE18F3B43300F634B1 /* Frameworks */,
+				03DE2ECF18F3B43300F634B1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				03DE2ED818F3B43300F634B1 /* PBXTargetDependency */,
+			);
+			name = HoundTests;
+			productName = HoundTests;
+			productReference = 03DE2ED118F3B43300F634B1 /* HoundTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		03DE2E9D18F3B43300F634B1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = hound;
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "Cranky Bit";
+				TargetAttributes = {
+					03DE2EA418F3B43300F634B1 = {
+						DevelopmentTeam = LAK6SGQ7Q5;
+					};
+					03DE2ED018F3B43300F634B1 = {
+						TestTargetID = 03DE2EA418F3B43300F634B1;
+					};
+				};
+			};
+			buildConfigurationList = 03DE2EA018F3B43300F634B1 /* Build configuration list for PBXProject "Hound" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 03DE2E9C18F3B43300F634B1;
+			productRefGroup = 03DE2EA618F3B43300F634B1 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				03DE2EA418F3B43300F634B1 /* Hound */,
+				03DE2ED018F3B43300F634B1 /* HoundTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		03DE2EA318F3B43300F634B1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				03DE2EC118F3B43300F634B1 /* Main_iPad.storyboard in Resources */,
+				03DE2ECC18F3B43300F634B1 /* Images.xcassets in Resources */,
+				03DE2EBE18F3B43300F634B1 /* Main_iPhone.storyboard in Resources */,
+				03DE2EB518F3B43300F634B1 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		03DE2ECF18F3B43300F634B1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				03DE2EDE18F3B43300F634B1 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		03DE2EA118F3B43300F634B1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				03DE2EB718F3B43300F634B1 /* main.m in Sources */,
+				03DE2ECA18F3B43300F634B1 /* houndDetailViewController.m in Sources */,
+				03DE2EBB18F3B43300F634B1 /* houndAppDelegate.m in Sources */,
+				03DE2EC418F3B43300F634B1 /* Hound.xcdatamodeld in Sources */,
+				03DE2EC718F3B43300F634B1 /* houndMasterViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		03DE2ECD18F3B43300F634B1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				03DE2EE018F3B43300F634B1 /* HoundTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		03DE2ED818F3B43300F634B1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 03DE2EA418F3B43300F634B1 /* Hound */;
+			targetProxy = 03DE2ED718F3B43300F634B1 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		03DE2EB318F3B43300F634B1 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				03DE2EB418F3B43300F634B1 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		03DE2EBC18F3B43300F634B1 /* Main_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				03DE2EBD18F3B43300F634B1 /* Base */,
+			);
+			name = Main_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		03DE2EBF18F3B43300F634B1 /* Main_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				03DE2EC018F3B43300F634B1 /* Base */,
+			);
+			name = Main_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+		03DE2EDC18F3B43300F634B1 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				03DE2EDD18F3B43300F634B1 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		03DE2EE118F3B43300F634B1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		03DE2EE218F3B43300F634B1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		03DE2EE418F3B43300F634B1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Hound/Hound-Prefix.pch";
+				INFOPLIST_FILE = "Hound/Hound-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		03DE2EE518F3B43300F634B1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Hound/Hound-Prefix.pch";
+				INFOPLIST_FILE = "Hound/Hound-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		03DE2EE718F3B43300F634B1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Hound.app/Hound";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Hound/Hound-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "HoundTests/HoundTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		03DE2EE818F3B43300F634B1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Hound.app/Hound";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Hound/Hound-Prefix.pch";
+				INFOPLIST_FILE = "HoundTests/HoundTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		03DE2EA018F3B43300F634B1 /* Build configuration list for PBXProject "Hound" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				03DE2EE118F3B43300F634B1 /* Debug */,
+				03DE2EE218F3B43300F634B1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		03DE2EE318F3B43300F634B1 /* Build configuration list for PBXNativeTarget "Hound" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				03DE2EE418F3B43300F634B1 /* Debug */,
+				03DE2EE518F3B43300F634B1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		03DE2EE618F3B43300F634B1 /* Build configuration list for PBXNativeTarget "HoundTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				03DE2EE718F3B43300F634B1 /* Debug */,
+				03DE2EE818F3B43300F634B1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		03DE2EC218F3B43300F634B1 /* Hound.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				03DE2EC318F3B43300F634B1 /* Hound.xcdatamodel */,
+			);
+			currentVersion = 03DE2EC318F3B43300F634B1 /* Hound.xcdatamodel */;
+			path = Hound.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 03DE2E9D18F3B43300F634B1 /* Project object */;
+}
