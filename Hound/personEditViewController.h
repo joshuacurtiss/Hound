@@ -11,6 +11,8 @@
 @interface personEditViewController : UIViewController
 - (IBAction)save:(id)sender;
 - (IBAction)cancel:(id)sender;
-@property (strong, nonatomic) IBOutlet UITextField *name;
+@property (strong, nonatomic) IBOutlet UITextField *fname;
+@property (strong, nonatomic) IBOutlet UITextField *lname;
+@property (strong, nonatomic) IBOutlet UITextView *notes;
 
 @end

@@ -131,7 +131,7 @@
         <!--Person Edit View Controller - New Person-->
         <scene sceneID="CPn-Jp-n8j">
             <objects>
-                <viewController id="Fjd-O5-bLe" customClass="personEditViewController" sceneMemberID="viewController">
+                <viewController modalTransitionStyle="partialCurl" id="Fjd-O5-bLe" customClass="personEditViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Waq-zN-JD7"/>
                         <viewControllerLayoutGuide type="bottom" id="xEw-Bf-a4P"/>
@@ -140,12 +140,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AYN-c7-MLd">
-                                <rect key="frame" x="234" y="172" width="300" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AYN-c7-MLd">
+                                <rect key="frame" x="107" y="144" width="300" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="next"/>
                             </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xaf-Vs-ZgG">
+                                <rect key="frame" x="107" y="182" width="300" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="next"/>
+                            </textField>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R3b-Cl-JxD">
+                                <rect key="frame" x="107" y="220" width="300" height="161"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" address="YES"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -155,7 +168,7 @@
                                 <action selector="cancel:" destination="Fjd-O5-bLe" id="0uj-Rz-Wl7"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Save" id="ATo-CR-58p">
+                        <barButtonItem key="rightBarButtonItem" title="Done" id="ATo-CR-58p">
                             <connections>
                                 <action selector="save:" destination="Fjd-O5-bLe" id="ZoJ-G8-YNM"/>
                                 <segue destination="Qnc-v8-Fub" kind="unwind" unwindAction="unwindToTableViewController:" id="R9f-r1-KTE"/>
@@ -163,13 +176,15 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="name" destination="AYN-c7-MLd" id="Od7-Ga-9Bj"/>
+                        <outlet property="fname" destination="AYN-c7-MLd" id="G9m-gU-Kqy"/>
+                        <outlet property="lname" destination="xaf-Vs-ZgG" id="41F-rj-sJT"/>
+                        <outlet property="notes" destination="R3b-Cl-JxD" id="VwA-s8-KXX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7f5-ft-ct8" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="Qnc-v8-Fub" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3278" y="-836"/>
+            <point key="canvasLocation" x="3216" y="-854"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="5Ba-s2-moI">
@@ -282,6 +297,24 @@
                 <exit id="abM-AU-BH6" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2304" y="-836"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="1FB-eG-49g">
+            <objects>
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="v5O-yE-SM0" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="JUP-wG-dOD"/>
+                        <viewControllerLayoutGuide type="bottom" id="kAq-FD-0Pr"/>
+                    </layoutGuides>
+                    <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="d32-0M-cfV">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <toolbarItems/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BAT-7P-10V" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
         </scene>
     </scenes>
     <resources>

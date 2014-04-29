@@ -26,7 +26,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    self.notes.layer.cornerRadius = 8.0f;
+    self.notes.layer.masksToBounds = NO;
+    self.notes.layer.borderWidth = .5f;
+    self.notes.layer.shadowColor = [UIColor lightGrayColor].CGColor;
 }
 
 - (void)didReceiveMemoryWarning

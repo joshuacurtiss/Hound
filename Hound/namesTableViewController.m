@@ -72,7 +72,7 @@
 - (IBAction)unwindToTableViewController:(UIStoryboardSegue *)sender
 {
     personEditViewController *editVC = (personEditViewController *)sender.sourceViewController;
-    NSString *name = editVC.name.text;
+    NSString *name = [NSString stringWithFormat:@"%@, %@",editVC.lname.text,editVC.fname.text] ;
     if( ![name length]==0 && ![[name stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] length]==0 )
     {
         [data insertObject:name atIndex:0];
