@@ -32,6 +32,9 @@
 		036C7027190F51CF00856637 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 036C7025190F51CF00856637 /* InfoPlist.strings */; };
 		036C7029190F51CF00856637 /* HoundTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 036C7028190F51CF00856637 /* HoundTests.m */; };
 		036C7033190F51DD00856637 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 036C7032190F51DD00856637 /* Main.storyboard */; };
+		03C6BDEF1910D702008E4B1B /* MapPin.m in Sources */ = {isa = PBXBuildFile; fileRef = 03C6BDEE1910D702008E4B1B /* MapPin.m */; };
+		03D776271910C90900E3BF53 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03D776261910C90900E3BF53 /* MapKit.framework */; };
+		03D7762A1910C95500E3BF53 /* mapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03D776291910C95500E3BF53 /* mapViewController.m */; };
 		395BD1EF1910476800F3B75F /* Address.m in Sources */ = {isa = PBXBuildFile; fileRef = 395BD1EE1910476800F3B75F /* Address.m */; };
 		395BD1F21910476800F3B75F /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 395BD1F11910476800F3B75F /* Person.m */; };
 /* End PBXBuildFile section */
@@ -79,6 +82,11 @@
 		036C7026190F51CF00856637 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		036C7028190F51CF00856637 /* HoundTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HoundTests.m; sourceTree = "<group>"; };
 		036C7032190F51DD00856637 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = ../Main.storyboard; sourceTree = "<group>"; };
+		03C6BDED1910D702008E4B1B /* MapPin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapPin.h; sourceTree = "<group>"; };
+		03C6BDEE1910D702008E4B1B /* MapPin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapPin.m; sourceTree = "<group>"; };
+		03D776261910C90900E3BF53 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		03D776281910C95500E3BF53 /* mapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mapViewController.h; sourceTree = "<group>"; };
+		03D776291910C95500E3BF53 /* mapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = mapViewController.m; sourceTree = "<group>"; };
 		395BD1ED1910476800F3B75F /* Address.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Address.h; sourceTree = "<group>"; };
 		395BD1EE1910476800F3B75F /* Address.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Address.m; sourceTree = "<group>"; };
 		395BD1F01910476800F3B75F /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
@@ -92,6 +100,7 @@
 			files = (
 				036C7000190F51CF00856637 /* CoreGraphics.framework in Frameworks */,
 				036C7004190F51CF00856637 /* CoreData.framework in Frameworks */,
+				03D776271910C90900E3BF53 /* MapKit.framework in Frameworks */,
 				036C7002190F51CF00856637 /* UIKit.framework in Frameworks */,
 				036C6FFE190F51CF00856637 /* Foundation.framework in Frameworks */,
 			);
@@ -134,6 +143,7 @@
 		036C6FFC190F51CF00856637 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				03D776261910C90900E3BF53 /* MapKit.framework */,
 				036C6FFD190F51CF00856637 /* Foundation.framework */,
 				036C6FFF190F51CF00856637 /* CoreGraphics.framework */,
 				036C7001190F51CF00856637 /* UIKit.framework */,
@@ -164,6 +174,10 @@
 				033219CC190F787300998CC3 /* addressesTableViewController.m */,
 				033219CE190F861A00998CC3 /* detailViewController.h */,
 				033219CF190F861A00998CC3 /* detailViewController.m */,
+				03D776281910C95500E3BF53 /* mapViewController.h */,
+				03D776291910C95500E3BF53 /* mapViewController.m */,
+				03C6BDED1910D702008E4B1B /* MapPin.h */,
+				03C6BDEE1910D702008E4B1B /* MapPin.m */,
 			);
 			path = Hound;
 			sourceTree = "<group>";
@@ -257,6 +271,14 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Cranky Bit";
 				TargetAttributes = {
+					036C6FF9190F51CF00856637 = {
+						DevelopmentTeam = LAK6SGQ7Q5;
+						SystemCapabilities = {
+							com.apple.iOS = {
+								enabled = 1;
+							};
+						};
+					};
 					036C7019190F51CF00856637 = {
 						TestTargetID = 036C6FF9190F51CF00856637;
 					};
@@ -314,10 +336,12 @@
 				036C700C190F51CF00856637 /* main.m in Sources */,
 				033219CA190F786500998CC3 /* namesTableViewController.m in Sources */,
 				395BD1EF1910476800F3B75F /* Address.m in Sources */,
+				03C6BDEF1910D702008E4B1B /* MapPin.m in Sources */,
 				033219C1190F6D6D00998CC3 /* personEditViewController.m in Sources */,
 				033219D0190F861A00998CC3 /* detailViewController.m in Sources */,
 				036C7010190F51CF00856637 /* houndAppDelegate.m in Sources */,
 				395BD1F21910476800F3B75F /* Person.m in Sources */,
+				03D7762A1910C95500E3BF53 /* mapViewController.m in Sources */,
 				033219CD190F787300998CC3 /* addressesTableViewController.m in Sources */,
 				036C7013190F51CF00856637 /* Hound.xcdatamodeld in Sources */,
 			);
@@ -438,10 +462,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Hound/Hound-Prefix.pch";
 				INFOPLIST_FILE = "Hound/Hound-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 2;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -451,10 +479,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Hound/Hound-Prefix.pch";
 				INFOPLIST_FILE = "Hound/Hound-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 2;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
