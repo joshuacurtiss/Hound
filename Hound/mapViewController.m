@@ -7,9 +7,8 @@
 //
 
 #import "mapViewController.h"
-#import "MapPin.h"
 
-@interface mapViewController ()
+@interface mapViewController () <MKMapViewDelegate>
 
 @end
 
@@ -28,18 +27,38 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    MKCoordinateRegion region = {{0.0, 0.0}, {0.0, 0.0}};
-    region.center.latitude=40.707184;
-    region.center.longitude=-73.998392;
-    region.span.longitudeDelta=0.01f;
-    region.span.latitudeDelta=0.01f;
+    self.mapview.showsUserLocation=YES;
+    self.mapview.delegate=self;
+    [self.mapview setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
+    MKCoordinateRegion region=MKCoordinateRegionMakeWithDistance(self.mapview.userLocation.coordinate, 100000, 100000);
     [mapview setRegion:region animated:YES];
+
+    [self pinAddress:@"1100 California St, San Francisco, CA 94108" withTitle:@"Grace Cathedral"];
+    [self pinAddress:@"736 Mission St, San Francisco, CA 94103" withTitle:@"Jessie Square"];
+    [self pinAddress:@"135 4th St, San Francisco, CA 94103" withTitle:@"Metreon"];
+    [self pinAddress:@"747 Howard St, San Francisco, CA 94103" withTitle:@"Moscone Center"];
     
-    MapPin *ann = [[MapPin alloc] init];
-    ann.title = @"Brooklyn Bridge";
-    ann.subtitle = @"New York";
-    ann.coordinate = region.center;
-    [mapview addAnnotation:ann];
+}
+
+- (void) pinAddress:(NSString *)addr withTitle:(NSString *)title
+{
+    NSString *location = addr;
+    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+    [geocoder geocodeAddressString:location
+                 completionHandler:^(NSArray* placemarks, NSError* error)
+                 {
+                     if (placemarks && placemarks.count > 0)
+                     {
+                         CLPlacemark *topResult = [placemarks objectAtIndex:0];
+                         MKPlacemark *placemark = [[MKPlacemark alloc] initWithPlacemark:topResult];
+                         MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
+                         point.coordinate=placemark.coordinate;
+                         point.title=title;
+                         point.subtitle=addr;
+                         [self.mapview addAnnotation:point];
+                     }
+                 }
+     ];
 }
 
 - (void)didReceiveMemoryWarning
@@ -48,7 +67,7 @@
     // Dispose of any resources that can be recreated.
 }
 
--(IBAction)setMap:(id)sender;
+-(IBAction)setMap:(id)sender
 {
     switch (((UISegmentedControl *) sender).selectedSegmentIndex) {
         case 0:

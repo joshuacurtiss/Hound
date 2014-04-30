@@ -32,7 +32,6 @@
 		036C7027190F51CF00856637 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 036C7025190F51CF00856637 /* InfoPlist.strings */; };
 		036C7029190F51CF00856637 /* HoundTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 036C7028190F51CF00856637 /* HoundTests.m */; };
 		036C7033190F51DD00856637 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 036C7032190F51DD00856637 /* Main.storyboard */; };
-		03C6BDEF1910D702008E4B1B /* MapPin.m in Sources */ = {isa = PBXBuildFile; fileRef = 03C6BDEE1910D702008E4B1B /* MapPin.m */; };
 		03D776271910C90900E3BF53 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03D776261910C90900E3BF53 /* MapKit.framework */; };
 		03D7762A1910C95500E3BF53 /* mapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03D776291910C95500E3BF53 /* mapViewController.m */; };
 		395BD1EF1910476800F3B75F /* Address.m in Sources */ = {isa = PBXBuildFile; fileRef = 395BD1EE1910476800F3B75F /* Address.m */; };
@@ -82,8 +81,6 @@
 		036C7026190F51CF00856637 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		036C7028190F51CF00856637 /* HoundTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HoundTests.m; sourceTree = "<group>"; };
 		036C7032190F51DD00856637 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = ../Main.storyboard; sourceTree = "<group>"; };
-		03C6BDED1910D702008E4B1B /* MapPin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapPin.h; sourceTree = "<group>"; };
-		03C6BDEE1910D702008E4B1B /* MapPin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapPin.m; sourceTree = "<group>"; };
 		03D776261910C90900E3BF53 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		03D776281910C95500E3BF53 /* mapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mapViewController.h; sourceTree = "<group>"; };
 		03D776291910C95500E3BF53 /* mapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = mapViewController.m; sourceTree = "<group>"; };
@@ -176,8 +173,6 @@
 				033219CF190F861A00998CC3 /* detailViewController.m */,
 				03D776281910C95500E3BF53 /* mapViewController.h */,
 				03D776291910C95500E3BF53 /* mapViewController.m */,
-				03C6BDED1910D702008E4B1B /* MapPin.h */,
-				03C6BDEE1910D702008E4B1B /* MapPin.m */,
 			);
 			path = Hound;
 			sourceTree = "<group>";
@@ -336,7 +331,6 @@
 				036C700C190F51CF00856637 /* main.m in Sources */,
 				033219CA190F786500998CC3 /* namesTableViewController.m in Sources */,
 				395BD1EF1910476800F3B75F /* Address.m in Sources */,
-				03C6BDEF1910D702008E4B1B /* MapPin.m in Sources */,
 				033219C1190F6D6D00998CC3 /* personEditViewController.m in Sources */,
 				033219D0190F861A00998CC3 /* detailViewController.m in Sources */,
 				036C7010190F51CF00856637 /* houndAppDelegate.m in Sources */,
