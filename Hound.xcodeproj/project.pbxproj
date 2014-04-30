@@ -34,9 +34,10 @@
 		036C7033190F51DD00856637 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 036C7032190F51DD00856637 /* Main.storyboard */; };
 		03BB39F31911AE850057A961 /* near-me.png in Resources */ = {isa = PBXBuildFile; fileRef = 03BB39F11911AE850057A961 /* near-me.png */; };
 		03BB39F41911AE850057A961 /* trash.png in Resources */ = {isa = PBXBuildFile; fileRef = 03BB39F21911AE850057A961 /* trash.png */; };
+		03BB39F71911B5540057A961 /* Address.m in Sources */ = {isa = PBXBuildFile; fileRef = 03BB39F61911B5540057A961 /* Address.m */; };
+		03BB39F91911B89E0057A961 /* home-add.png in Resources */ = {isa = PBXBuildFile; fileRef = 03BB39F81911B89E0057A961 /* home-add.png */; };
 		03D776271910C90900E3BF53 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03D776261910C90900E3BF53 /* MapKit.framework */; };
 		03D7762A1910C95500E3BF53 /* mapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03D776291910C95500E3BF53 /* mapViewController.m */; };
-		395BD1EF1910476800F3B75F /* Address.m in Sources */ = {isa = PBXBuildFile; fileRef = 395BD1EE1910476800F3B75F /* Address.m */; };
 		395BD1F21910476800F3B75F /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 395BD1F11910476800F3B75F /* Person.m */; };
 /* End PBXBuildFile section */
 
@@ -85,11 +86,12 @@
 		036C7032190F51DD00856637 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = ../Main.storyboard; sourceTree = "<group>"; };
 		03BB39F11911AE850057A961 /* near-me.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "near-me.png"; sourceTree = "<group>"; };
 		03BB39F21911AE850057A961 /* trash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trash.png; sourceTree = "<group>"; };
+		03BB39F51911B5540057A961 /* Address.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Address.h; sourceTree = "<group>"; };
+		03BB39F61911B5540057A961 /* Address.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Address.m; sourceTree = "<group>"; };
+		03BB39F81911B89E0057A961 /* home-add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home-add.png"; sourceTree = "<group>"; };
 		03D776261910C90900E3BF53 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		03D776281910C95500E3BF53 /* mapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mapViewController.h; sourceTree = "<group>"; };
 		03D776291910C95500E3BF53 /* mapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = mapViewController.m; sourceTree = "<group>"; };
-		395BD1ED1910476800F3B75F /* Address.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Address.h; sourceTree = "<group>"; };
-		395BD1EE1910476800F3B75F /* Address.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Address.m; sourceTree = "<group>"; };
 		395BD1F01910476800F3B75F /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
 		395BD1F11910476800F3B75F /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -164,10 +166,10 @@
 				036C700F190F51CF00856637 /* houndAppDelegate.m */,
 				036C7014190F51CF00856637 /* Images.xcassets */,
 				036C7011190F51CF00856637 /* Hound.xcdatamodeld */,
+				03BB39F51911B5540057A961 /* Address.h */,
+				03BB39F61911B5540057A961 /* Address.m */,
 				395BD1F01910476800F3B75F /* Person.h */,
 				395BD1F11910476800F3B75F /* Person.m */,
-				395BD1ED1910476800F3B75F /* Address.h */,
-				395BD1EE1910476800F3B75F /* Address.m */,
 				036C7006190F51CF00856637 /* Supporting Files */,
 				033219C8190F786500998CC3 /* namesTableViewController.h */,
 				033219C9190F786500998CC3 /* namesTableViewController.m */,
@@ -213,6 +215,7 @@
 		036C7034190F570D00856637 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				03BB39F81911B89E0057A961 /* home-add.png */,
 				03BB39F11911AE850057A961 /* near-me.png */,
 				03BB39F21911AE850057A961 /* trash.png */,
 				033219BD190F6A0E00998CC3 /* add.png */,
@@ -312,6 +315,7 @@
 				036C7033190F51DD00856637 /* Main.storyboard in Resources */,
 				033219B5190F591C00998CC3 /* home.png in Resources */,
 				033219BE190F6A0E00998CC3 /* add.png in Resources */,
+				03BB39F91911B89E0057A961 /* home-add.png in Resources */,
 				036C700A190F51CF00856637 /* InfoPlist.strings in Resources */,
 				03BB39F31911AE850057A961 /* near-me.png in Resources */,
 				036C7015190F51CF00856637 /* Images.xcassets in Resources */,
@@ -338,13 +342,13 @@
 			files = (
 				036C700C190F51CF00856637 /* main.m in Sources */,
 				033219CA190F786500998CC3 /* namesTableViewController.m in Sources */,
-				395BD1EF1910476800F3B75F /* Address.m in Sources */,
 				033219C1190F6D6D00998CC3 /* personEditViewController.m in Sources */,
 				033219D0190F861A00998CC3 /* detailViewController.m in Sources */,
 				036C7010190F51CF00856637 /* houndAppDelegate.m in Sources */,
 				395BD1F21910476800F3B75F /* Person.m in Sources */,
 				03D7762A1910C95500E3BF53 /* mapViewController.m in Sources */,
 				033219CD190F787300998CC3 /* addressesTableViewController.m in Sources */,
+				03BB39F71911B5540057A961 /* Address.m in Sources */,
 				036C7013190F51CF00856637 /* Hound.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

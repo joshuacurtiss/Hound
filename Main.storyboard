@@ -48,9 +48,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Addresses" id="jjs-tf-qeT">
-                        <barButtonItem key="rightBarButtonItem" image="add.png" id="gRP-hS-CxA">
+                        <barButtonItem key="rightBarButtonItem" image="home-add.png" id="gRP-hS-CxA">
                             <connections>
-                                <segue destination="T5T-QF-kgq" kind="modal" id="oV8-bX-RqK"/>
+                                <segue destination="0Tb-kK-qsm" kind="modal" id="OsO-IW-ReU"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -212,6 +212,67 @@
             </objects>
             <point key="canvasLocation" x="3216" y="-854"/>
         </scene>
+        <!--View Controller - New Address-->
+        <scene sceneID="LFq-Qt-U1Z">
+            <objects>
+                <viewController title="New Address" id="9IX-dM-LSE" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Kcg-sN-fCq"/>
+                        <viewControllerLayoutGuide type="bottom" id="SeE-3l-h1j"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="2hf-yD-VGq">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="82W-uP-eKe">
+                                <rect key="frame" x="200" y="170" width="468" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="h9K-x7-7vV">
+                                <rect key="frame" x="200" y="208" width="468" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
+                            </textField>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Address:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eA9-lV-iG3">
+                                <rect key="frame" x="100" y="174" width="68" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="City" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lF5-mG-c1m">
+                                <rect key="frame" x="200" y="246" width="284" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="State" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XMe-Sq-S0S">
+                                <rect key="frame" x="492" y="246" width="60" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" autocorrectionType="no" enablesReturnKeyAutomatically="YES"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Zip Code" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yCQ-xO-PmT">
+                                <rect key="frame" x="560" y="246" width="108" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad" enablesReturnKeyAutomatically="YES"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="New Address" id="MDk-JG-s7u">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="3F6-c2-t1k"/>
+                        <barButtonItem key="rightBarButtonItem" title="Done" id="Jjb-yJ-FoB"/>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bK5-cS-AHu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3216" y="336"/>
+        </scene>
         <!--Detail View Controller-->
         <scene sceneID="5Ba-s2-moI">
             <objects>
@@ -240,7 +301,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rm0-iz-uUc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2956" y="317"/>
+            <point key="canvasLocation" x="2304" y="-1979"/>
         </scene>
         <!--Navigation Controller - Names-->
         <scene sceneID="Toa-CP-dfo">
@@ -324,27 +385,28 @@
             </objects>
             <point key="canvasLocation" x="2304" y="-836"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="1FB-eG-49g">
+        <!--Navigation Controller-->
+        <scene sceneID="Mn2-k8-bU1">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="v5O-yE-SM0" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="JUP-wG-dOD"/>
-                        <viewControllerLayoutGuide type="bottom" id="kAq-FD-0Pr"/>
-                    </layoutGuides>
-                    <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="d32-0M-cfV">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="0Tb-kK-qsm" sceneMemberID="viewController">
                     <toolbarItems/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="BAT-7P-10V" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="0Z6-GL-FdC">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="9IX-dM-LSE" kind="relationship" relationship="rootViewController" id="Ug9-JN-PIS"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uZc-te-Wyx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="2304" y="336"/>
         </scene>
     </scenes>
     <resources>
         <image name="add.png" width="28" height="25"/>
+        <image name="home-add.png" width="29" height="30"/>
         <image name="home.png" width="29" height="30"/>
         <image name="map.png" width="30" height="30"/>
         <image name="near-me.png" width="30" height="30"/>
@@ -355,7 +417,4 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
-    <inferredMetricsTieBreakers>
-        <segue reference="oV8-bX-RqK"/>
-    </inferredMetricsTieBreakers>
 </document>
