@@ -32,6 +32,8 @@
 		036C7027190F51CF00856637 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 036C7025190F51CF00856637 /* InfoPlist.strings */; };
 		036C7029190F51CF00856637 /* HoundTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 036C7028190F51CF00856637 /* HoundTests.m */; };
 		036C7033190F51DD00856637 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 036C7032190F51DD00856637 /* Main.storyboard */; };
+		03BB39F31911AE850057A961 /* near-me.png in Resources */ = {isa = PBXBuildFile; fileRef = 03BB39F11911AE850057A961 /* near-me.png */; };
+		03BB39F41911AE850057A961 /* trash.png in Resources */ = {isa = PBXBuildFile; fileRef = 03BB39F21911AE850057A961 /* trash.png */; };
 		03D776271910C90900E3BF53 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03D776261910C90900E3BF53 /* MapKit.framework */; };
 		03D7762A1910C95500E3BF53 /* mapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03D776291910C95500E3BF53 /* mapViewController.m */; };
 		395BD1EF1910476800F3B75F /* Address.m in Sources */ = {isa = PBXBuildFile; fileRef = 395BD1EE1910476800F3B75F /* Address.m */; };
@@ -81,6 +83,8 @@
 		036C7026190F51CF00856637 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		036C7028190F51CF00856637 /* HoundTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HoundTests.m; sourceTree = "<group>"; };
 		036C7032190F51DD00856637 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = ../Main.storyboard; sourceTree = "<group>"; };
+		03BB39F11911AE850057A961 /* near-me.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "near-me.png"; sourceTree = "<group>"; };
+		03BB39F21911AE850057A961 /* trash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trash.png; sourceTree = "<group>"; };
 		03D776261910C90900E3BF53 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		03D776281910C95500E3BF53 /* mapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mapViewController.h; sourceTree = "<group>"; };
 		03D776291910C95500E3BF53 /* mapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = mapViewController.m; sourceTree = "<group>"; };
@@ -209,6 +213,8 @@
 		036C7034190F570D00856637 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				03BB39F11911AE850057A961 /* near-me.png */,
+				03BB39F21911AE850057A961 /* trash.png */,
 				033219BD190F6A0E00998CC3 /* add.png */,
 				033219B6190F61CD00998CC3 /* hound.png */,
 				033219B0190F591C00998CC3 /* map.png */,
@@ -307,8 +313,10 @@
 				033219B5190F591C00998CC3 /* home.png in Resources */,
 				033219BE190F6A0E00998CC3 /* add.png in Resources */,
 				036C700A190F51CF00856637 /* InfoPlist.strings in Resources */,
+				03BB39F31911AE850057A961 /* near-me.png in Resources */,
 				036C7015190F51CF00856637 /* Images.xcassets in Resources */,
 				033219B4190F591C00998CC3 /* people.png in Resources */,
+				03BB39F41911AE850057A961 /* trash.png in Resources */,
 				033219B7190F61CD00998CC3 /* hound.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

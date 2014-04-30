@@ -15,7 +15,6 @@
 @property (nonatomic, retain) IBOutlet MKMapView *mapview;
 
 -(IBAction)setMap:(id)sender;
--(IBAction)getLocation:(id)sender;
--(IBAction)getDirections:(id)sender;
+- (IBAction)getLocation:(id)sender;
 
 @end

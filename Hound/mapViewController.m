@@ -27,12 +27,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.mapview.showsUserLocation=YES;
-    self.mapview.delegate=self;
-    [self.mapview setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
-    MKCoordinateRegion region=MKCoordinateRegionMakeWithDistance(self.mapview.userLocation.coordinate, 100000, 100000);
-    [mapview setRegion:region animated:YES];
-
+    [self getLoc];
     [self pinAddress:@"1100 California St, San Francisco, CA 94108" withTitle:@"Grace Cathedral"];
     [self pinAddress:@"736 Mission St, San Francisco, CA 94103" withTitle:@"Jessie Square"];
     [self pinAddress:@"135 4th St, San Francisco, CA 94103" withTitle:@"Metreon"];
@@ -85,9 +80,17 @@
     }
 }
 
--(IBAction)getLocation:(id)sender
+- (IBAction)getLocation:(id)sender
+{
+    [self getLoc];
+}
+
+-(void)getLoc
 {
     mapview.showsUserLocation = YES;
+    [mapview setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
+    MKCoordinateRegion region=MKCoordinateRegionMakeWithDistance(self.mapview.userLocation.coordinate, 4000, 4000);
+    [mapview setRegion:region animated:YES];
 }
 
 -(IBAction)getDirections:(id)sender

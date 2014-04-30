@@ -71,7 +71,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="POc-XD-wCu">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="POc-XD-wCu">
                                 <rect key="frame" x="0.0" y="0.0" width="768" height="1033"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </mapView>
@@ -80,6 +80,8 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="POc-XD-wCu" secondAttribute="trailing" id="9k4-Xr-1yp"/>
                             <constraint firstItem="POc-XD-wCu" firstAttribute="top" secondItem="jhC-aH-NcL" secondAttribute="top" id="aSA-iP-QuI"/>
+                            <constraint firstAttribute="bottom" secondItem="POc-XD-wCu" secondAttribute="bottom" constant="-9" id="oF8-Ea-TNd"/>
+                            <constraint firstItem="POc-XD-wCu" firstAttribute="leading" secondItem="jhC-aH-NcL" secondAttribute="leading" id="zV8-3s-93v"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Map" id="Xpa-NP-ksr">
@@ -97,9 +99,9 @@
                                 </connections>
                             </segmentedControl>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Location" id="RTf-PH-NG4">
+                        <barButtonItem key="rightBarButtonItem" image="near-me.png" style="plain" id="RTf-PH-NG4">
                             <connections>
-                                <action selector="getLocation:" destination="0pD-xQ-GkS" id="HaV-Jy-a0U"/>
+                                <action selector="getLocation:" destination="0pD-xQ-GkS" id="yLq-U3-0hn"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -345,6 +347,7 @@
         <image name="add.png" width="28" height="25"/>
         <image name="home.png" width="29" height="30"/>
         <image name="map.png" width="30" height="30"/>
+        <image name="near-me.png" width="30" height="30"/>
         <image name="people.png" width="30" height="23"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
