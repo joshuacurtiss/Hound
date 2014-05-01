@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface addressesTableViewController : UITableViewController
-
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) NSMutableArray *data;
 @end

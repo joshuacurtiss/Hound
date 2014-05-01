@@ -6,6 +6,7 @@
         <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="notes" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="phone" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="phoneType" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="state" optional="YES" attributeType="String" syncable="YES"/>
@@ -19,7 +20,7 @@
         <relationship name="addresses" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Address" inverseName="person" inverseEntity="Address" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Address" positionX="-54" positionY="18" width="128" height="195"/>
+        <element name="Address" positionX="-54" positionY="18" width="128" height="210"/>
         <element name="Person" positionX="-299" positionY="158" width="128" height="103"/>
     </elements>
 </model>

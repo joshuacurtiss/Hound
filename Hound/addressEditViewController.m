@@ -1,18 +1,18 @@
 //
-//  personEditViewController.m
+//  addressEditViewController.m
 //  Hound
 //
-//  Created by Joshua Curtiss on 4/29/14.
+//  Created by Joshua Curtiss on 4/30/14.
 //  Copyright (c) 2014 Cranky Bit. All rights reserved.
 //
 
-#import "personEditViewController.h"
+#import "addressEditViewController.h"
 
-@interface personEditViewController ()
+@interface addressEditViewController ()
 
 @end
 
-@implementation personEditViewController
+@implementation addressEditViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -49,10 +49,13 @@
 }
 */
 
-- (IBAction)save:(id)sender {
+- (IBAction)save:(id)sender
+{
 }
 
-- (IBAction)cancel:(id)sender {
+- (IBAction)cancel:(id)sender
+{
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
 @end

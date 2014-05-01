@@ -16,6 +16,8 @@
 		033219CA190F786500998CC3 /* namesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 033219C9190F786500998CC3 /* namesTableViewController.m */; };
 		033219CD190F787300998CC3 /* addressesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 033219CC190F787300998CC3 /* addressesTableViewController.m */; };
 		033219D0190F861A00998CC3 /* detailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 033219CF190F861A00998CC3 /* detailViewController.m */; };
+		0333E1AA191201730057DCC3 /* addressEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0333E1A9191201730057DCC3 /* addressEditViewController.m */; };
+		0333E1AD191202740057DCC3 /* Address.m in Sources */ = {isa = PBXBuildFile; fileRef = 0333E1AC191202740057DCC3 /* Address.m */; };
 		036C6FFE190F51CF00856637 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 036C6FFD190F51CF00856637 /* Foundation.framework */; };
 		036C7000190F51CF00856637 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 036C6FFF190F51CF00856637 /* CoreGraphics.framework */; };
 		036C7002190F51CF00856637 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 036C7001190F51CF00856637 /* UIKit.framework */; };
@@ -34,7 +36,6 @@
 		036C7033190F51DD00856637 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 036C7032190F51DD00856637 /* Main.storyboard */; };
 		03BB39F31911AE850057A961 /* near-me.png in Resources */ = {isa = PBXBuildFile; fileRef = 03BB39F11911AE850057A961 /* near-me.png */; };
 		03BB39F41911AE850057A961 /* trash.png in Resources */ = {isa = PBXBuildFile; fileRef = 03BB39F21911AE850057A961 /* trash.png */; };
-		03BB39F71911B5540057A961 /* Address.m in Sources */ = {isa = PBXBuildFile; fileRef = 03BB39F61911B5540057A961 /* Address.m */; };
 		03BB39F91911B89E0057A961 /* home-add.png in Resources */ = {isa = PBXBuildFile; fileRef = 03BB39F81911B89E0057A961 /* home-add.png */; };
 		03D776271910C90900E3BF53 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03D776261910C90900E3BF53 /* MapKit.framework */; };
 		03D7762A1910C95500E3BF53 /* mapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03D776291910C95500E3BF53 /* mapViewController.m */; };
@@ -65,6 +66,10 @@
 		033219CC190F787300998CC3 /* addressesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = addressesTableViewController.m; sourceTree = "<group>"; };
 		033219CE190F861A00998CC3 /* detailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = detailViewController.h; sourceTree = "<group>"; };
 		033219CF190F861A00998CC3 /* detailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = detailViewController.m; sourceTree = "<group>"; };
+		0333E1A8191201730057DCC3 /* addressEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = addressEditViewController.h; sourceTree = "<group>"; };
+		0333E1A9191201730057DCC3 /* addressEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = addressEditViewController.m; sourceTree = "<group>"; };
+		0333E1AB191202740057DCC3 /* Address.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Address.h; sourceTree = "<group>"; };
+		0333E1AC191202740057DCC3 /* Address.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Address.m; sourceTree = "<group>"; };
 		036C6FFA190F51CF00856637 /* Hound.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hound.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		036C6FFD190F51CF00856637 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		036C6FFF190F51CF00856637 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -86,8 +91,6 @@
 		036C7032190F51DD00856637 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = ../Main.storyboard; sourceTree = "<group>"; };
 		03BB39F11911AE850057A961 /* near-me.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "near-me.png"; sourceTree = "<group>"; };
 		03BB39F21911AE850057A961 /* trash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trash.png; sourceTree = "<group>"; };
-		03BB39F51911B5540057A961 /* Address.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Address.h; sourceTree = "<group>"; };
-		03BB39F61911B5540057A961 /* Address.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Address.m; sourceTree = "<group>"; };
 		03BB39F81911B89E0057A961 /* home-add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home-add.png"; sourceTree = "<group>"; };
 		03D776261910C90900E3BF53 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		03D776281910C95500E3BF53 /* mapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mapViewController.h; sourceTree = "<group>"; };
@@ -162,18 +165,20 @@
 				036C7032190F51DD00856637 /* Main.storyboard */,
 				033219BF190F6D6D00998CC3 /* personEditViewController.h */,
 				033219C0190F6D6D00998CC3 /* personEditViewController.m */,
+				0333E1A8191201730057DCC3 /* addressEditViewController.h */,
+				0333E1A9191201730057DCC3 /* addressEditViewController.m */,
 				036C700E190F51CF00856637 /* houndAppDelegate.h */,
 				036C700F190F51CF00856637 /* houndAppDelegate.m */,
 				036C7014190F51CF00856637 /* Images.xcassets */,
+				0333E1AB191202740057DCC3 /* Address.h */,
+				0333E1AC191202740057DCC3 /* Address.m */,
 				036C7011190F51CF00856637 /* Hound.xcdatamodeld */,
-				03BB39F51911B5540057A961 /* Address.h */,
-				03BB39F61911B5540057A961 /* Address.m */,
 				395BD1F01910476800F3B75F /* Person.h */,
 				395BD1F11910476800F3B75F /* Person.m */,
 				036C7006190F51CF00856637 /* Supporting Files */,
+				033219CB190F787300998CC3 /* addressesTableViewController.h */,
 				033219C8190F786500998CC3 /* namesTableViewController.h */,
 				033219C9190F786500998CC3 /* namesTableViewController.m */,
-				033219CB190F787300998CC3 /* addressesTableViewController.h */,
 				033219CC190F787300998CC3 /* addressesTableViewController.m */,
 				033219CE190F861A00998CC3 /* detailViewController.h */,
 				033219CF190F861A00998CC3 /* detailViewController.m */,
@@ -342,14 +347,15 @@
 			files = (
 				036C700C190F51CF00856637 /* main.m in Sources */,
 				033219CA190F786500998CC3 /* namesTableViewController.m in Sources */,
+				0333E1AD191202740057DCC3 /* Address.m in Sources */,
 				033219C1190F6D6D00998CC3 /* personEditViewController.m in Sources */,
 				033219D0190F861A00998CC3 /* detailViewController.m in Sources */,
 				036C7010190F51CF00856637 /* houndAppDelegate.m in Sources */,
 				395BD1F21910476800F3B75F /* Person.m in Sources */,
 				03D7762A1910C95500E3BF53 /* mapViewController.m in Sources */,
 				033219CD190F787300998CC3 /* addressesTableViewController.m in Sources */,
-				03BB39F71911B5540057A961 /* Address.m in Sources */,
 				036C7013190F51CF00856637 /* Hound.xcdatamodeld in Sources */,
+				0333E1AA191201730057DCC3 /* addressEditViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

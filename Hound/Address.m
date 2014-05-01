@@ -15,12 +15,13 @@
 @dynamic addr1;
 @dynamic addr2;
 @dynamic city;
+@dynamic latitude;
+@dynamic longitude;
 @dynamic phone;
 @dynamic phoneType;
 @dynamic state;
 @dynamic zip;
-@dynamic latitude;
-@dynamic longitude;
+@dynamic notes;
 @dynamic person;
 
 @end

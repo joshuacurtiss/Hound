@@ -212,10 +212,10 @@
             </objects>
             <point key="canvasLocation" x="3216" y="-854"/>
         </scene>
-        <!--View Controller - New Address-->
+        <!--Address Edit View Controller - New Address-->
         <scene sceneID="LFq-Qt-U1Z">
             <objects>
-                <viewController title="New Address" id="9IX-dM-LSE" sceneMemberID="viewController">
+                <viewController title="New Address" id="9IX-dM-LSE" customClass="addressEditViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Kcg-sN-fCq"/>
                         <viewControllerLayoutGuide type="bottom" id="SeE-3l-h1j"/>
@@ -243,8 +243,28 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Phone:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lHp-Rh-eOe">
+                                <rect key="frame" x="100" y="300" width="54" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Notes:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xof-z2-0Jh">
+                                <rect key="frame" x="100" y="384" width="51" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="City" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lF5-mG-c1m">
                                 <rect key="frame" x="200" y="246" width="284" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Phone" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jna-fb-LhH">
+                                <rect key="frame" x="200" y="297" width="284" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
@@ -261,15 +281,56 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad" enablesReturnKeyAutomatically="YES"/>
                             </textField>
+                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="leT-BA-fL1">
+                                <rect key="frame" x="0.0" y="808" width="768" height="216"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            </pickerView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gh3-Ge-bLy">
+                                <rect key="frame" x="510" y="301" width="152" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.099999999999999686" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6cX-YX-HrA">
+                                <rect key="frame" x="200" y="384" width="468" height="250"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" address="YES"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="New Address" id="MDk-JG-s7u">
-                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="3F6-c2-t1k"/>
-                        <barButtonItem key="rightBarButtonItem" title="Done" id="Jjb-yJ-FoB"/>
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="3F6-c2-t1k">
+                            <connections>
+                                <action selector="cancel:" destination="9IX-dM-LSE" id="Lft-YI-lBI"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Done" id="Jjb-yJ-FoB">
+                            <connections>
+                                <action selector="save:" destination="9IX-dM-LSE" id="fGP-vL-fi5"/>
+                                <segue destination="ACh-qQ-OTA" kind="unwind" unwindAction="unwindToTableViewController:" id="v1w-1F-1h6"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="addr1" destination="82W-uP-eKe" id="Qh4-UY-IIO"/>
+                        <outlet property="addr2" destination="h9K-x7-7vV" id="tcy-sC-hPw"/>
+                        <outlet property="city" destination="lF5-mG-c1m" id="FQo-Wf-RqL"/>
+                        <outlet property="notes" destination="6cX-YX-HrA" id="tU8-T7-fN5"/>
+                        <outlet property="phone" destination="jna-fb-LhH" id="iDv-oe-Wvd"/>
+                        <outlet property="phoneTypeLabel" destination="Gh3-Ge-bLy" id="SXS-W1-pgh"/>
+                        <outlet property="phoneTypePicker" destination="leT-BA-fL1" id="Oy8-kM-T6I"/>
+                        <outlet property="state" destination="XMe-Sq-S0S" id="qnQ-6p-BLM"/>
+                        <outlet property="zip" destination="yCQ-xO-PmT" id="sP8-ch-iVP"/>
+                        <segue destination="ACh-qQ-OTA" kind="unwind" unwindAction="unwindToTableViewController:" id="Zju-88-01X"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bK5-cS-AHu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="ACh-qQ-OTA" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="3216" y="336"/>
         </scene>
