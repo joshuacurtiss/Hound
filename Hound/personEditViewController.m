@@ -49,11 +49,9 @@
 }
 */
 
-- (IBAction)save:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
 
-- (IBAction)cancel:(id)sender {
+- (IBAction)cancel:(id)sender
+{
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 @end
