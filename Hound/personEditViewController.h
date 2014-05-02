@@ -13,5 +13,5 @@
 @property (strong, nonatomic) IBOutlet UITextField *fname;
 @property (strong, nonatomic) IBOutlet UITextField *lname;
 @property (strong, nonatomic) IBOutlet UITextView *notes;
-
+@property (strong) NSManagedObject *person;
 @end

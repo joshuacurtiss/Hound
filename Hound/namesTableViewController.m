@@ -9,9 +9,9 @@
 #import "namesTableViewController.h"
 #import "personEditViewController.h"
 #import "detailViewController.h"
+#import "houndAppDelegate.h"
 
 @interface namesTableViewController ()
-
 @end
 
 @implementation namesTableViewController
@@ -29,8 +29,27 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    data=[[NSMutableArray alloc] initWithObjects:@"Dog",@"Cat",@"Mouse", nil];
     self.navigationItem.leftBarButtonItem=self.editButtonItem;
+}
+
+- (void) viewWillAppear:(BOOL)animated
+{
+    [self refreshTable];
+}
+
+- (void) refreshTable
+{
+    NSLog(@"Reloading data and refreshing the table.");
+    houndAppDelegate *appDelegate=[[UIApplication sharedApplication] delegate];
+    NSManagedObjectContext *context = [appDelegate managedObjectContext];
+    NSEntityDescription *entityDesc = [NSEntityDescription entityForName:@"Person" inManagedObjectContext:context];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:entityDesc];
+    [request setSortDescriptors:[NSArray arrayWithObjects:[NSSortDescriptor sortDescriptorWithKey:@"lname" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)],
+                                 [NSSortDescriptor sortDescriptorWithKey:@"fname" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)], nil]];
+    NSError *error;
+    data=[[context executeFetchRequest:request error:&error] mutableCopy];
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -58,22 +77,29 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
     if( cell==nil )
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-    cell.textLabel.text=[data objectAtIndex:indexPath.row];
+    NSManagedObject *person=[data objectAtIndex:indexPath.row];
+    cell.textLabel.text=[NSString stringWithFormat:@"%@, %@", [person valueForKey:@"lname"], [person valueForKey:@"fname"]];
     return cell;
 }
 
 - (IBAction)unwindToTableViewController:(UIStoryboardSegue *)sender
 {
+    NSLog(@"Unwinding to table view controller.");
     personEditViewController *editVC = (personEditViewController *)sender.sourceViewController;
-    NSString *name = [NSString stringWithFormat:@"%@, %@",editVC.lname.text,editVC.fname.text] ;
-    if( ![name length]==0 && ![[name stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] length]==0 )
+    NSString *newname = [NSString stringWithFormat:@"%@ %@",editVC.fname.text,editVC.lname.text] ;
+    if( ![newname length]==0 && ![[newname stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] length]==0 )
     {
-        [data insertObject:name atIndex:0];
-        NSIndexPath *indexPath=[NSIndexPath indexPathForRow:0 inSection:0];
-        [self.tableView beginUpdates];
-        [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-        [self.tableView endUpdates];
+        houndAppDelegate *appDelegate=[[UIApplication sharedApplication] delegate];
+        NSManagedObjectContext *context = [appDelegate managedObjectContext];
+        NSManagedObjectContext *newPerson;
+        newPerson=[NSEntityDescription insertNewObjectForEntityForName:@"Person" inManagedObjectContext:context];
+        [newPerson setValue:editVC.fname.text forKey:@"fname"];
+        [newPerson setValue:editVC.lname.text forKey:@"lname"];
+        [newPerson setValue:editVC.notes.text forKey:@"notes"];
+        NSError *error=nil;
+        if( ![context save:&error] ) NSLog(@"Save failed! %@ %@",error, [error localizedDescription]);
     }
+    [self refreshTable];
     [editVC dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -90,23 +116,30 @@
 
 - (void) tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    houndAppDelegate *appDelegate=[[UIApplication sharedApplication] delegate];
+    NSManagedObjectContext *context = [appDelegate managedObjectContext];
     if( editingStyle==UITableViewCellEditingStyleDelete )
     {
-        // Remove item from array
+        [context deleteObject:[data objectAtIndex:indexPath.row]];
+        NSError *error=nil;
+        if(![context save:&error] )
+        {
+            NSLog(@"Can't delete! %@ %@",error, [error localizedDescription]);
+            return;
+        }
         [data removeObjectAtIndex:indexPath.row];
-        // Remove from table
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }
 }
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if( [[segue identifier] isEqualToString:@"ShowDetails"] )
+    if( [[segue identifier] isEqualToString:@"Show"] )
     {
         detailViewController *detailVC = [segue destinationViewController];
         NSIndexPath *myIndexPath = [self.tableView indexPathForSelectedRow];
         int row=[myIndexPath row];
-        detailVC.detail = @[[data objectAtIndex:row]];
+        detailVC.person = [data objectAtIndex:row];
     }
 }
 

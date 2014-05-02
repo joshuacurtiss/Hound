@@ -14,6 +14,8 @@
 
 @implementation personEditViewController
 
+@synthesize fname, lname, notes, person;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -26,10 +28,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.notes.layer.cornerRadius = 8.0f;
-    self.notes.layer.masksToBounds = NO;
-    self.notes.layer.borderWidth = .5f;
-    self.notes.layer.shadowColor = [UIColor lightGrayColor].CGColor;
+    notes.layer.cornerRadius = 8.0f;
+    notes.layer.masksToBounds = NO;
+    notes.layer.borderWidth = .5f;
+    notes.layer.shadowColor = [UIColor lightGrayColor].CGColor;
+    if( person!=nil )
+    {
+        fname.text=[person valueForKey:@"fname"];
+        lname.text=[person valueForKey:@"lname"];
+        notes.text=[person valueForKey:@"notes"];
+    }
 }
 
 - (void)didReceiveMemoryWarning

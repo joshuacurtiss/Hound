@@ -9,8 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface detailViewController : UIViewController
-
 @property (strong, nonatomic) IBOutlet UILabel *nameLabel;
-@property (strong, nonatomic) NSArray *detail;
-
+@property (strong) NSManagedObject *person;
 @end

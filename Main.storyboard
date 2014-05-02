@@ -133,7 +133,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="6CK-Ca-HoQ" kind="push" identifier="ShowDetails" id="FDN-a5-c9n"/>
+                                    <segue destination="6CK-Ca-HoQ" kind="push" identifier="Show" id="FDN-a5-c9n"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -145,7 +145,7 @@
                     <navigationItem key="navigationItem" title="Names" id="BYI-EW-hoF">
                         <barButtonItem key="rightBarButtonItem" image="add.png" id="JVS-tJ-YgO">
                             <connections>
-                                <segue destination="wpi-Uh-sqF" kind="modal" modalPresentationStyle="formSheet" id="DcO-DJ-SS2"/>
+                                <segue destination="wpi-Uh-sqF" kind="modal" identifier="New" modalPresentationStyle="formSheet" id="DcO-DJ-SS2"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -210,7 +210,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="540" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
-                                    <navigationItem title="New Person" id="Zf4-jX-dPO">
+                                    <navigationItem title="Person Details" id="Zf4-jX-dPO">
                                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="ekw-Mk-epf">
                                             <connections>
                                                 <action selector="cancel:" destination="wpi-Uh-sqF" id="5YC-6N-nIV"/>
@@ -412,7 +412,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="Bch-8C-L3i"/>
+                    <navigationItem key="navigationItem" id="Bch-8C-L3i">
+                        <barButtonItem key="rightBarButtonItem" title="Edit" id="Vif-hg-5gg">
+                            <connections>
+                                <segue destination="wpi-Uh-sqF" kind="modal" identifier="Update" modalPresentationStyle="formSheet" id="LTV-oy-TYk"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="nameLabel" destination="9Op-RM-Jb7" id="T4Y-kq-QvQ"/>
                     </connections>
@@ -496,4 +502,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="LTV-oy-TYk"/>
+    </inferredMetricsTieBreakers>
 </document>

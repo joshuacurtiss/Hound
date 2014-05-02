@@ -7,12 +7,16 @@
 //
 
 #import "detailViewController.h"
+#import "personEditViewController.h"
+#import "houndAppDelegate.h"
 
 @interface detailViewController ()
 
 @end
 
 @implementation detailViewController
+
+@synthesize person;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -26,14 +30,48 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.navigationItem.title=_detail[0];
-    self.nameLabel.text=_detail[0];
+    [self refreshView];
+}
+
+- (void) refreshView
+{
+    NSString *fullName=[NSString stringWithFormat:@"%@ %@",[person valueForKey:@"fname"],[person valueForKey:@"lname"]];
+    self.navigationItem.title=fullName;
+    self.nameLabel.text=fullName;
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)unwindToTableViewController:(UIStoryboardSegue *)sender
+{
+    NSLog(@"Unwinding to detail view controller.");
+    personEditViewController *editVC = (personEditViewController *)sender.sourceViewController;
+    NSString *newname = [NSString stringWithFormat:@"%@ %@",editVC.fname.text,editVC.lname.text] ;
+    if( ![newname length]==0 && ![[newname stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] length]==0 )
+    {
+        houndAppDelegate *appDelegate=[[UIApplication sharedApplication] delegate];
+        NSManagedObjectContext *context = [appDelegate managedObjectContext];
+        [person setValue:editVC.fname.text forKey:@"fname"];
+        [person setValue:editVC.lname.text forKey:@"lname"];
+        [person setValue:editVC.notes.text forKey:@"notes"];
+        NSError *error=nil;
+        if( ![context save:&error] ) NSLog(@"Save failed! %@ %@",error, [error localizedDescription]);
+    }
+    [self refreshView];
+    [editVC dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    NSLog(@"Prepare for segue: %@", [segue identifier]);
+    if( [[segue identifier] isEqualToString:@"Update"] )
+    {
+        personEditViewController *vc = [segue destinationViewController];
+        vc.person = person;
+    }
 }
 
 @end

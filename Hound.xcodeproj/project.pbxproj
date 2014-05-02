@@ -212,13 +212,13 @@
 		036C7005190F51CF00856637 /* Hound */ = {
 			isa = PBXGroup;
 			children = (
+				036C7032190F51DD00856637 /* Main.storyboard */,
+				036C700E190F51CF00856637 /* houndAppDelegate.h */,
+				036C700F190F51CF00856637 /* houndAppDelegate.m */,
 				0325DBC619133AF600921A22 /* Address */,
 				0325DBC519133AEF00921A22 /* Person */,
 				0325DBCB19133B8A00921A22 /* Map */,
 				0325DBCA19133B4B00921A22 /* Model */,
-				036C7032190F51DD00856637 /* Main.storyboard */,
-				036C700E190F51CF00856637 /* houndAppDelegate.h */,
-				036C700F190F51CF00856637 /* houndAppDelegate.m */,
 				036C7014190F51CF00856637 /* Images.xcassets */,
 				036C7006190F51CF00856637 /* Supporting Files */,
 			);
