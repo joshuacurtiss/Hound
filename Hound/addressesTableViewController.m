@@ -8,6 +8,7 @@
 
 #import "addressesTableViewController.h"
 #import "addressEditViewController.h"
+#import "addressDetailViewController.h"
 
 @interface addressesTableViewController ()
 
@@ -89,15 +90,13 @@
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    /*
     if( [[segue identifier] isEqualToString:@"ShowDetails"] )
     {
-        detailViewController *detailVC = [segue destinationViewController];
+        addressDetailViewController *detailVC = [segue destinationViewController];
         NSIndexPath *myIndexPath = [self.tableView indexPathForSelectedRow];
         int row=[myIndexPath row];
         detailVC.detail = @[[data objectAtIndex:row]];
     }
-    */
 }
 
 @end
