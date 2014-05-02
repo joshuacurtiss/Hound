@@ -51,6 +51,7 @@
 
 - (IBAction)save:(id)sender
 {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)cancel:(id)sender
