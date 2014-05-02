@@ -9,13 +9,14 @@
 #import "addressDetailViewController.h"
 #import "addressEditViewController.h"
 #import "houndAppDelegate.h"
+#import <CoreLocation/CoreLocation.h>
 
 @interface addressDetailViewController ()
 @end
 
 @implementation addressDetailViewController
 
-@synthesize address;
+@synthesize address, mapview;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -37,12 +38,30 @@
     NSString *fullAddr=[NSString stringWithFormat:@"%@ %@ %@ %@ %@",[address valueForKey:@"addr1"],[address valueForKey:@"addr2"],[address valueForKey:@"city"],[address valueForKey:@"state"],[address valueForKey:@"zip"]];
     self.navigationItem.title=fullAddr;
     self.addr1.text=fullAddr;
+    CLLocationCoordinate2D coord=CLLocationCoordinate2DMake( [[address valueForKey:@"latitude"] doubleValue], [[address valueForKey:@"longitude"] doubleValue] );
+    [self showClusterPoint:coord withTitle:fullAddr];
+    mapview.showsUserLocation = YES;
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(MKPointAnnotation *)showClusterPoint:(CLLocationCoordinate2D)coords withTitle:(NSString *)title
+{
+    float  zoomLevel = 0.03;
+    MKCoordinateRegion region = MKCoordinateRegionMake (coords, MKCoordinateSpanMake (zoomLevel, zoomLevel));
+    [mapview setRegion: [mapview regionThatFits: region] animated: YES];
+    
+    MKPointAnnotation *point = [[MKPointAnnotation alloc]init];
+    point.coordinate = coords;
+    point.title=title;
+    
+    [mapview addAnnotation:point];
+    
+    return point;
 }
 
 - (IBAction)unwindToTableViewController:(UIStoryboardSegue *)sender

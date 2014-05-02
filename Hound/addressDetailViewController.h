@@ -12,4 +12,5 @@
 @interface addressDetailViewController : UIViewController
 @property (strong, nonatomic) IBOutlet UILabel *addr1;
 @property (strong) NSManagedObject *address;
+@property (strong, nonatomic) IBOutlet MKMapView *mapview;
 @end
