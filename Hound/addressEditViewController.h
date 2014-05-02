@@ -18,7 +18,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *phoneTypeLabel;
 @property (strong, nonatomic) IBOutlet UIPickerView *phoneTypePicker;
 @property (strong, nonatomic) IBOutlet UITextView *notes;
-- (IBAction)save:(id)sender;
 - (IBAction)cancel:(id)sender;
 
 @end

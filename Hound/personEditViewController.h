@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface personEditViewController : UIViewController
-- (IBAction)save:(id)sender;
 - (IBAction)cancel:(id)sender;
 @property (strong, nonatomic) IBOutlet UITextField *fname;
 @property (strong, nonatomic) IBOutlet UITextField *lname;
