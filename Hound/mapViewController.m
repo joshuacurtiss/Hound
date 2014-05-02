@@ -7,6 +7,7 @@
 //
 
 #import "mapViewController.h"
+#import "houndAppDelegate.h"
 
 @interface mapViewController () <MKMapViewDelegate>
 
@@ -28,11 +29,25 @@
 {
     [super viewDidLoad];
     [self getLoc];
-    [self pinAddress:@"1100 California St, San Francisco, CA 94108" withTitle:@"Grace Cathedral"];
-    [self pinAddress:@"736 Mission St, San Francisco, CA 94103" withTitle:@"Jessie Square"];
-    [self pinAddress:@"135 4th St, San Francisco, CA 94103" withTitle:@"Metreon"];
-    [self pinAddress:@"747 Howard St, San Francisco, CA 94103" withTitle:@"Moscone Center"];
-    
+    [self pinAllAddresses];
+}
+
+- (void) pinAllAddresses
+{
+    houndAppDelegate *appDelegate=[[UIApplication sharedApplication] delegate];
+    NSManagedObjectContext *context = [appDelegate managedObjectContext];
+    NSEntityDescription *entityDesc = [NSEntityDescription entityForName:@"Address" inManagedObjectContext:context];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:entityDesc];
+    NSError *error;
+    NSArray *data=[[context executeFetchRequest:request error:&error] mutableCopy];
+    for( int i=0 ; i<[data count] ; i++ )
+    {
+        NSManagedObject *address=[data objectAtIndex:i];
+        NSString *fullAddr=[NSString stringWithFormat:@"%@ %@ %@ %@ %@",[address valueForKey:@"addr1"],[address valueForKey:@"addr2"],[address valueForKey:@"city"],[address valueForKey:@"state"],[address valueForKey:@"zip"]];
+        CLLocationCoordinate2D coord=CLLocationCoordinate2DMake( [[address valueForKey:@"latitude"] doubleValue], [[address valueForKey:@"longitude"] doubleValue] );
+        [self pinClusterPoint:coord withTitle:fullAddr];
+    }
 }
 
 - (void) pinAddress:(NSString *)addr withTitle:(NSString *)title
@@ -50,10 +65,19 @@
                          point.coordinate=placemark.coordinate;
                          point.title=title;
                          point.subtitle=addr;
-                         [self.mapview addAnnotation:point];
+                         [mapview addAnnotation:point];
                      }
                  }
      ];
+}
+
+-(MKPointAnnotation *)pinClusterPoint:(CLLocationCoordinate2D)coords withTitle:(NSString *)title
+{
+    MKPointAnnotation *point = [[MKPointAnnotation alloc]init];
+    point.coordinate = coords;
+    point.title=title;
+    [mapview addAnnotation:point];
+    return point;
 }
 
 - (void)didReceiveMemoryWarning
