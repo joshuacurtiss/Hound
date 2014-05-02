@@ -14,6 +14,8 @@
 
 @implementation addressEditViewController
 
+@synthesize addr1, addr2, city, state, zip, phone, notes, address;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -26,10 +28,20 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.notes.layer.cornerRadius = 8.0f;
-    self.notes.layer.masksToBounds = NO;
-    self.notes.layer.borderWidth = .5f;
-    self.notes.layer.shadowColor = [UIColor lightGrayColor].CGColor;
+    notes.layer.cornerRadius = 8.0f;
+    notes.layer.masksToBounds = NO;
+    notes.layer.borderWidth = .5f;
+    notes.layer.shadowColor = [UIColor lightGrayColor].CGColor;
+    if( address!=nil )
+    {
+        addr1.text=[address valueForKey:@"addr1"];
+        addr2.text=[address valueForKey:@"addr2"];
+        city.text=[address valueForKey:@"city"];
+        state.text=[address valueForKey:@"state"];
+        zip.text=[address valueForKey:@"zip"];
+        phone.text=[address valueForKey:@"phone"];
+        notes.text=[address valueForKey:@"notes"];
+    }
 }
 
 - (void)didReceiveMemoryWarning

@@ -11,7 +11,6 @@
 #import "houndAppDelegate.h"
 
 @interface detailViewController ()
-
 @end
 
 @implementation detailViewController

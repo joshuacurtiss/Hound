@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MapKit/MapKit.h>
 
 @interface addressDetailViewController : UIViewController
 @property (strong, nonatomic) IBOutlet UILabel *addr1;
-@property (strong, nonatomic) NSArray *detail;
+@property (strong) NSManagedObject *address;
 @end

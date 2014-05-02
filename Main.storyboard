@@ -41,7 +41,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="By3-w7-bVZ" kind="push" identifier="ShowDetails" id="8eL-Fl-SWz"/>
+                                    <segue destination="By3-w7-bVZ" kind="push" identifier="Show" id="8eL-Fl-SWz"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -53,7 +53,7 @@
                     <navigationItem key="navigationItem" title="Addresses" id="jjs-tf-qeT">
                         <barButtonItem key="rightBarButtonItem" image="home-add.png" id="gRP-hS-CxA">
                             <connections>
-                                <segue destination="9IX-dM-LSE" kind="modal" modalPresentationStyle="formSheet" id="o2v-p5-hwt"/>
+                                <segue destination="9IX-dM-LSE" kind="modal" identifier="New" modalPresentationStyle="formSheet" id="o2v-p5-hwt"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -260,7 +260,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="3wP-8f-DGP"/>
+                    <navigationItem key="navigationItem" id="3wP-8f-DGP">
+                        <barButtonItem key="rightBarButtonItem" title="Edit" id="loy-W2-F87">
+                            <connections>
+                                <segue destination="9IX-dM-LSE" kind="modal" identifier="Update" modalPresentationStyle="formSheet" id="it3-kl-4b1"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="addr1" destination="cRj-Ls-KjX" id="ISp-Ix-bvG"/>
                     </connections>
@@ -503,6 +509,7 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="o2v-p5-hwt"/>
         <segue reference="LTV-oy-TYk"/>
     </inferredMetricsTieBreakers>
 </document>

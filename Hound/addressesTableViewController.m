@@ -9,9 +9,9 @@
 #import "addressesTableViewController.h"
 #import "addressEditViewController.h"
 #import "addressDetailViewController.h"
+#import "houndAppDelegate.h"
 
 @interface addressesTableViewController ()
-
 @end
 
 @implementation addressesTableViewController
@@ -29,8 +29,29 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    data=[[NSMutableArray alloc] initWithObjects:@"123",@"456",@"789", nil];
     self.navigationItem.leftBarButtonItem=self.editButtonItem;
+}
+
+- (void) viewWillAppear:(BOOL)animated
+{
+    [self refreshTable];
+}
+
+- (void) refreshTable
+{
+    NSLog(@"Reloading data and refreshing the table.");
+    houndAppDelegate *appDelegate=[[UIApplication sharedApplication] delegate];
+    NSManagedObjectContext *context = [appDelegate managedObjectContext];
+    NSEntityDescription *entityDesc = [NSEntityDescription entityForName:@"Address" inManagedObjectContext:context];
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [request setEntity:entityDesc];
+    [request setSortDescriptors:[NSArray arrayWithObjects:[NSSortDescriptor sortDescriptorWithKey:@"state" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)],
+                                 [NSSortDescriptor sortDescriptorWithKey:@"city" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)],
+                                 [NSSortDescriptor sortDescriptorWithKey:@"addr1" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)],
+                                 [NSSortDescriptor sortDescriptorWithKey:@"addr2" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)], nil]];
+    NSError *error;
+    data=[[context executeFetchRequest:request error:&error] mutableCopy];
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -58,44 +79,79 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
     if( cell==nil )
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-    cell.textLabel.text=[data objectAtIndex:indexPath.row];
+    NSManagedObject *obj=[data objectAtIndex:indexPath.row];
+    cell.textLabel.text=[NSString stringWithFormat:@"%@ %@", [obj valueForKey:@"addr1"], [obj valueForKey:@"addr2"]];
     return cell;
 }
 
 - (IBAction)unwindToTableViewController:(UIStoryboardSegue *)sender
 {
+    NSLog(@"Unwinding to table view controller.");
     addressEditViewController *editVC = (addressEditViewController *)sender.sourceViewController;
-    NSString *addr = [NSString stringWithFormat:@"%@",editVC.addr1.text] ;
-    if( ![addr length]==0 && ![[addr stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] length]==0 )
-    {
-        [data insertObject:addr atIndex:0];
-        NSIndexPath *indexPath=[NSIndexPath indexPathForRow:0 inSection:0];
-        [self.tableView beginUpdates];
-        [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-        [self.tableView endUpdates];
-    }
-    [editVC dismissViewControllerAnimated:YES completion:nil];
+    NSString *fullAddr=[NSString stringWithFormat:@"%@ %@ %@ %@ %@",editVC.addr1.text,editVC.addr2.text,editVC.city.text,editVC.state.text,editVC.zip.text];
+    NSLog(@"Will be looking for: %@",fullAddr);
+    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+    [geocoder geocodeAddressString:fullAddr
+                 completionHandler:^(NSArray* placemarks, NSError* error)
+     {
+         if (placemarks && placemarks.count > 0)
+         {
+             CLPlacemark *topResult = [placemarks objectAtIndex:0];
+             MKPlacemark *placemark = [[MKPlacemark alloc] initWithPlacemark:topResult];
+             NSLog(@"Coordinates are: %f, %f", placemark.coordinate.longitude, placemark.coordinate.latitude);
+             houndAppDelegate *appDelegate=[[UIApplication sharedApplication] delegate];
+             NSManagedObjectContext *context = [appDelegate managedObjectContext];
+             NSManagedObjectContext *newObj;
+             newObj=[NSEntityDescription insertNewObjectForEntityForName:@"Address" inManagedObjectContext:context];
+             [newObj setValue:editVC.addr1.text forKey:@"addr1"];
+             [newObj setValue:editVC.addr2.text forKey:@"addr2"];
+             [newObj setValue:editVC.city.text forKey:@"city"];
+             [newObj setValue:editVC.state.text forKey:@"state"];
+             [newObj setValue:editVC.zip.text forKey:@"zip"];
+             [newObj setValue:editVC.phone.text forKey:@"phone"];
+             [newObj setValue:editVC.notes.text forKey:@"notes"];
+             [newObj setValue:[NSNumber numberWithDouble:placemark.coordinate.longitude] forKey:@"longitude"];
+             [newObj setValue:[NSNumber numberWithDouble:placemark.coordinate.latitude] forKey:@"latitude"];
+             NSError *error=nil;
+             if( ![context save:&error] ) NSLog(@"Save failed! %@ %@",error, [error localizedDescription]);
+             [self refreshTable];
+             [editVC dismissViewControllerAnimated:YES completion:nil];
+         }
+         else
+         {
+             UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Address not found" message: @"That address could not be found on the map!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+             [alert show];
+         }
+     }
+     ];
 }
 
 - (void) tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    houndAppDelegate *appDelegate=[[UIApplication sharedApplication] delegate];
+    NSManagedObjectContext *context = [appDelegate managedObjectContext];
     if( editingStyle==UITableViewCellEditingStyleDelete )
     {
-        // Remove item from array
+        [context deleteObject:[data objectAtIndex:indexPath.row]];
+        NSError *error=nil;
+        if(![context save:&error] )
+        {
+            NSLog(@"Can't delete! %@ %@",error, [error localizedDescription]);
+            return;
+        }
         [data removeObjectAtIndex:indexPath.row];
-        // Remove from table
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }
 }
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if( [[segue identifier] isEqualToString:@"ShowDetails"] )
+    if( [[segue identifier] isEqualToString:@"Show"] )
     {
         addressDetailViewController *detailVC = [segue destinationViewController];
         NSIndexPath *myIndexPath = [self.tableView indexPathForSelectedRow];
         int row=[myIndexPath row];
-        detailVC.detail = @[[data objectAtIndex:row]];
+        detailVC.address = [data objectAtIndex:row];
     }
 }
 
