@@ -9,11 +9,11 @@
 #import "addressEditViewController.h"
 
 @interface addressEditViewController ()
-
+@property (nonatomic, strong) UIPopoverController *popOver;
 @end
 
 @implementation addressEditViewController 
-@synthesize addr1, addr2, city, state, zip, phone, notes, address;
+@synthesize addr1, addr2, city, state, zip, phone, notes, address, person, name;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -58,6 +58,12 @@
     return YES;
 }
 
+- (void) setNewPerson:(NSManagedObject *)newperson
+{
+    person=newperson;
+    [name setTitle:[NSString stringWithFormat:@"%@ %@",[person valueForKey:@"fname"], [person valueForKey:@"lname"]] forState:UIControlStateNormal];
+}
+
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
     // Handle phone formatting:
@@ -94,6 +100,13 @@
 - (IBAction)cancel:(id)sender
 {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)btnName:(id)sender
+{
+    namePopoverViewController *PopoverView=[[namePopoverViewController alloc] initWithStyle:UITableViewStylePlain];
+    self.popOver =[[UIPopoverController alloc] initWithContentViewController:PopoverView];
+    [self.popOver presentPopoverFromRect:[sender frame] inView:self.view permittedArrowDirections:UIPopoverArrowDirectionDown animated:YES];
 }
 
 -(NSString*)formatNumber:(NSString*)mobileNumber
