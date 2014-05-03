@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface personEditViewController : UIViewController
+@interface personEditViewController : UIViewController <UITextFieldDelegate>
 - (IBAction)cancel:(id)sender;
 @property (strong, nonatomic) IBOutlet UITextField *fname;
 @property (strong, nonatomic) IBOutlet UITextField *lname;

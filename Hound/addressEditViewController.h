@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface addressEditViewController : UIViewController
+@interface addressEditViewController : UIViewController <UITextFieldDelegate>
 @property (strong, nonatomic) IBOutlet UITextField *addr1;
 @property (strong, nonatomic) IBOutlet UITextField *addr2;
 @property (strong, nonatomic) IBOutlet UITextField *city;

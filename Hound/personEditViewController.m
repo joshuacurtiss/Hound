@@ -38,12 +38,36 @@
         lname.text=[person valueForKey:@"lname"];
         notes.text=[person valueForKey:@"notes"];
     }
+    [fname becomeFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    NSArray *txt = [NSArray arrayWithObjects:fname, lname, notes, nil];
+    for( int i=0 ; i<[txt count] ; i++ )
+    {
+        if( textField == [txt objectAtIndex:i] )
+        {
+            [textField resignFirstResponder];
+            if( i<[txt count] ) [[txt objectAtIndex:i+1] becomeFirstResponder];
+        }
+    }
+    return YES;
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    NSUInteger newLength = [textField.text length] + [string length] - range.length;
+    NSArray *txt = [NSArray arrayWithObjects:fname, lname, nil];
+    NSArray *txtLen = [NSArray arrayWithObjects:[NSNumber numberWithInt:50],[NSNumber numberWithInt:80], nil];
+    for( int i=0 ; i<[txt count] ; i++ ) if( textField==[txt objectAtIndex:i] ) return (newLength>[txtLen[i] integerValue])?NO:YES;
+    return YES;
 }
 
 - (IBAction)cancel:(id)sender
