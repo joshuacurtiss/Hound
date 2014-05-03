@@ -9,9 +9,11 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import "Address.h"
+#import "Person.h"
 
 @interface addressDetailViewController : UIViewController
-@property (strong, nonatomic) IBOutlet UILabel *addr1;
+@property (strong, nonatomic) IBOutlet UITextView *addrText;
+@property (strong, nonatomic) IBOutlet UITextView *noteText;
 @property (strong) Address *address;
 @property (strong, nonatomic) IBOutlet MKMapView *mapview;
 @end

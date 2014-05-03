@@ -16,7 +16,7 @@
 
 @implementation addressDetailViewController
 
-@synthesize address, mapview;
+@synthesize address, mapview, addrText, noteText;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -31,15 +31,19 @@
 {
     [super viewDidLoad];
     [self refreshView];
+    mapview.layer.borderColor=[[UIColor blackColor] CGColor];
+    mapview.layer.borderWidth=1.0;
 }
 
 - (void) refreshView
 {
-    NSString *fullAddr=[NSString stringWithFormat:@"%@ %@ %@ %@ %@",[address valueForKey:@"addr1"],[address valueForKey:@"addr2"],[address valueForKey:@"city"],[address valueForKey:@"state"],[address valueForKey:@"zip"]];
-    self.navigationItem.title=fullAddr;
-    self.addr1.text=fullAddr;
+    NSString *fullName=[NSString stringWithFormat:@"%@ %@",address.person.fname,address.person.lname];
+    self.navigationItem.title=[self formatAddressSingleLine:address];
+    self.addrText.text=[NSString stringWithFormat:@"%@\n%@\n\n",fullName,[self formatAddressMultiline:address]];
+    if( [address.phone length]>0 ) self.addrText.text=[NSString stringWithFormat:@"%@Phone: %@",self.addrText.text,address.phone];
+    self.noteText.text=address.notes;
     CLLocationCoordinate2D coord=CLLocationCoordinate2DMake( [[address valueForKey:@"latitude"] doubleValue], [[address valueForKey:@"longitude"] doubleValue] );
-    [self showClusterPoint:coord withTitle:fullAddr];
+    [self showClusterPoint:coord withTitle:fullName withSubtitle:[self formatAddressSingleLine:address]];
     mapview.showsUserLocation = YES;
 }
 
@@ -49,18 +53,16 @@
     // Dispose of any resources that can be recreated.
 }
 
--(MKPointAnnotation *)showClusterPoint:(CLLocationCoordinate2D)coords withTitle:(NSString *)title
+-(MKPointAnnotation *)showClusterPoint:(CLLocationCoordinate2D)coords withTitle:(NSString *)title withSubtitle:(NSString *)subtitle
 {
     float  zoomLevel = 0.03;
     MKCoordinateRegion region = MKCoordinateRegionMake (coords, MKCoordinateSpanMake (zoomLevel, zoomLevel));
     [mapview setRegion: [mapview regionThatFits: region] animated: YES];
-    
     MKPointAnnotation *point = [[MKPointAnnotation alloc]init];
     point.coordinate = coords;
     point.title=title;
-    
+    point.subtitle=subtitle;
     [mapview addAnnotation:point];
-    
     return point;
 }
 
@@ -113,6 +115,29 @@
         addressEditViewController *vc = [segue destinationViewController];
         vc.address = address;
     }
+}
+
+- (NSString *) formatAddressMultiline:(Address *)addr
+{
+    NSString *out=[NSString stringWithFormat:@"%@\n",[self trimString:addr.addr1]];
+    if( [[self trimString:addr.addr2] length]>0 ) out=[NSString stringWithFormat:@"%@%@\n",out,[self trimString:addr.addr2]];
+    if( [[self trimString:addr.city] length]>0 ) out=[NSString stringWithFormat:@"%@%@",out,[self trimString:addr.city]];
+    if( [[self trimString:addr.state] length]>0 || [[self trimString:addr.zip] length]>0 ) out=[NSString stringWithFormat:@"%@, %@",out,[self trimString:[NSString stringWithFormat:@"%@ %@",addr.state,addr.zip]]];
+    return out;
+}
+
+- (NSString *) formatAddressSingleLine:(Address *)addr
+{
+    NSString *out=[self trimString:addr.addr1];
+    if( [[self trimString:addr.addr2] length]>0 ) out=[NSString stringWithFormat:@"%@ %@",out,[self trimString:addr.addr2]];
+    if( [[self trimString:addr.city] length]>0 ) out=[NSString stringWithFormat:@"%@, %@",out,[self trimString:addr.city]];
+    if( [[self trimString:addr.state] length]>0 || [[self trimString:addr.zip] length]>0 ) out=[NSString stringWithFormat:@"%@, %@",out,[self trimString:[NSString stringWithFormat:@"%@ %@",addr.state,addr.zip]]];
+    return out;
+}
+
+- (NSString *) trimString:(NSString *)str
+{
+    return [str stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
 }
 
 @end
