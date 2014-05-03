@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
+#import "Person.h"
+#import "Address.h"
 
 @interface mapViewController : UIViewController {
     MKMapView *mapview;

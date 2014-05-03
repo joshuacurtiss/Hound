@@ -48,10 +48,11 @@
     [mapview removeAnnotations:mapview.annotations];
     for( int i=0 ; i<[data count] ; i++ )
     {
-        NSManagedObject *address=[data objectAtIndex:i];
-        NSString *fullAddr=[NSString stringWithFormat:@"%@ %@ %@ %@ %@",[address valueForKey:@"addr1"],[address valueForKey:@"addr2"],[address valueForKey:@"city"],[address valueForKey:@"state"],[address valueForKey:@"zip"]];
+        Address *address=[data objectAtIndex:i];
+        NSString *fullAddr=[self formatAddress:address];
+        NSString *fullName=[NSString stringWithFormat:@"%@ %@",address.person.fname,address.person.lname];
         CLLocationCoordinate2D coord=CLLocationCoordinate2DMake( [[address valueForKey:@"latitude"] doubleValue], [[address valueForKey:@"longitude"] doubleValue] );
-        [self pinClusterPoint:coord withTitle:fullAddr];
+        [self pinClusterPoint:coord withTitle:fullName withSubTitle:fullAddr];
     }
 }
 
@@ -77,11 +78,12 @@
      ];
 }
 
--(MKPointAnnotation *)pinClusterPoint:(CLLocationCoordinate2D)coords withTitle:(NSString *)title
+-(MKPointAnnotation *)pinClusterPoint:(CLLocationCoordinate2D)coords withTitle:(NSString *)title withSubTitle:(NSString *)subtitle
 {
     MKPointAnnotation *point = [[MKPointAnnotation alloc]init];
     point.coordinate = coords;
     point.title=title;
+    point.subtitle=subtitle;
     [mapview addAnnotation:point];
     NSLog(@"Pinned %f, %f", point.coordinate.longitude, point.coordinate.latitude);
     return point;
@@ -128,6 +130,20 @@
 {
     NSString *urlString=@"http://maps.apple.com/maps?daddr=40.707184,-73.998392";
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
+}
+
+- (NSString *) formatAddress:(Address *)addr
+{
+    NSString *out=[self trimString:addr.addr1];
+    if( [[self trimString:addr.addr2] length]>0 ) out=[NSString stringWithFormat:@"%@ %@",out,[self trimString:addr.addr2]];
+    if( [[self trimString:addr.city] length]>0 ) out=[NSString stringWithFormat:@"%@, %@",out,[self trimString:addr.city]];
+    if( [[self trimString:addr.state] length]>0 || [[self trimString:addr.zip] length]>0 ) out=[NSString stringWithFormat:@"%@, %@",out,[self trimString:[NSString stringWithFormat:@"%@ %@",addr.state,addr.zip]]];
+    return out;
+}
+
+- (NSString *) trimString:(NSString *)str
+{
+    return [str stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
 }
 
 @end
