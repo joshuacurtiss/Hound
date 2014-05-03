@@ -7,6 +7,7 @@
 //
 
 #import "addressEditViewController.h"
+#import "Person.h"
 
 @interface addressEditViewController ()
 @property (nonatomic, strong) UIPopoverController *popOver;
@@ -33,13 +34,16 @@
     notes.layer.shadowColor = [UIColor lightGrayColor].CGColor;
     if( address!=nil )
     {
-        addr1.text=[address valueForKey:@"addr1"];
-        addr2.text=[address valueForKey:@"addr2"];
-        city.text=[address valueForKey:@"city"];
-        state.text=[address valueForKey:@"state"];
-        zip.text=[address valueForKey:@"zip"];
-        phone.text=[address valueForKey:@"phone"];
-        notes.text=[address valueForKey:@"notes"];
+        addr1.text=address.addr1;
+        addr2.text=address.addr2;
+        city.text=address.city;
+        state.text=address.state;
+        zip.text=address.zip;
+        phone.text=address.phone;
+        notes.text=address.notes;
+        Person *p=address.person;
+        NSLog(@"%@ %@",address,p);
+        if( p!=nil ) [self setNewPerson:p];
     }
     [addr1 becomeFirstResponder];
 }
@@ -58,10 +62,10 @@
     return YES;
 }
 
-- (void) setNewPerson:(NSManagedObject *)newperson
+- (void) setNewPerson:(Person *)newperson
 {
     person=newperson;
-    [name setTitle:[NSString stringWithFormat:@"%@ %@",[person valueForKey:@"fname"], [person valueForKey:@"lname"]] forState:UIControlStateNormal];
+    [name setTitle:[NSString stringWithFormat:@"%@ %@",person.fname, person.lname] forState:UIControlStateNormal];
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
@@ -105,6 +109,10 @@
 - (IBAction)btnName:(id)sender
 {
     namePopoverViewController *PopoverView=[[namePopoverViewController alloc] initWithStyle:UITableViewStylePlain];
+    PopoverView.personSelected = ^(Person *newperson){
+        [self setNewPerson:newperson];
+        [self.popOver dismissPopoverAnimated:YES];
+    };
     self.popOver =[[UIPopoverController alloc] initWithContentViewController:PopoverView];
     [self.popOver presentPopoverFromRect:[sender frame] inView:self.view permittedArrowDirections:UIPopoverArrowDirectionDown animated:YES];
 }

@@ -86,16 +86,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSManagedObject *person=[data objectAtIndex:indexPath.row];
+    Person *person=[data objectAtIndex:indexPath.row];
     NSLog(@"You choose %@", [person valueForKey:@"fname"]);
-    
-    //    addressEditViewController *vc =
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
+    self.personSelected(person);
 }
 
 @end

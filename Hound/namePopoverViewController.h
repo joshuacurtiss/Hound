@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Person.h"
 
 @interface namePopoverViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray *data;
+@property (nonatomic, copy) void (^personSelected)(Person *newperson);
 @end

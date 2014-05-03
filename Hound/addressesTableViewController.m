@@ -79,8 +79,8 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
     if( cell==nil )
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-    NSManagedObject *obj=[data objectAtIndex:indexPath.row];
-    cell.textLabel.text=[NSString stringWithFormat:@"%@ %@", [obj valueForKey:@"addr1"], [obj valueForKey:@"addr2"]];
+    Address *obj=[data objectAtIndex:indexPath.row];
+    cell.textLabel.text=[NSString stringWithFormat:@"%@ %@", obj.addr1, obj.addr2];
     return cell;
 }
 
@@ -101,7 +101,7 @@
              NSLog(@"Coordinates are: %f, %f", placemark.coordinate.longitude, placemark.coordinate.latitude);
              houndAppDelegate *appDelegate=[[UIApplication sharedApplication] delegate];
              NSManagedObjectContext *context = [appDelegate managedObjectContext];
-             NSManagedObjectContext *newObj;
+             Address *newObj;
              newObj=[NSEntityDescription insertNewObjectForEntityForName:@"Address" inManagedObjectContext:context];
              [newObj setValue:editVC.addr1.text forKey:@"addr1"];
              [newObj setValue:editVC.addr2.text forKey:@"addr2"];
@@ -112,6 +112,7 @@
              [newObj setValue:editVC.notes.text forKey:@"notes"];
              [newObj setValue:[NSNumber numberWithDouble:placemark.coordinate.longitude] forKey:@"longitude"];
              [newObj setValue:[NSNumber numberWithDouble:placemark.coordinate.latitude] forKey:@"latitude"];
+             newObj.person=editVC.person;
              NSError *error=nil;
              if( ![context save:&error] ) NSLog(@"Save failed! %@ %@",error, [error localizedDescription]);
              [self refreshTable];

@@ -90,6 +90,7 @@
              [address setValue:editVC.notes.text forKey:@"notes"];
              [address setValue:[NSNumber numberWithDouble:placemark.coordinate.longitude] forKey:@"longitude"];
              [address setValue:[NSNumber numberWithDouble:placemark.coordinate.latitude] forKey:@"latitude"];
+             address.person=editVC.person;
              NSError *error=nil;
              if( ![context save:&error] ) NSLog(@"Save failed! %@ %@",error, [error localizedDescription]);
              [self refreshView];
