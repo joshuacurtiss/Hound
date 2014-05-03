@@ -45,6 +45,7 @@
     [request setEntity:entityDesc];
     NSError *error;
     NSArray *data=[[context executeFetchRequest:request error:&error] mutableCopy];
+    [mapview removeAnnotations:mapview.annotations];
     for( int i=0 ; i<[data count] ; i++ )
     {
         NSManagedObject *address=[data objectAtIndex:i];
