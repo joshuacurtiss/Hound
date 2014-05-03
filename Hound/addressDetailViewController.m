@@ -66,7 +66,7 @@
 
 - (IBAction)unwindToTableViewController:(UIStoryboardSegue *)sender
 {
-    NSLog(@"Unwinding to detail view controller.");
+    NSLog(@"Unwinding to table detail view controller.");
     addressEditViewController *editVC = (addressEditViewController *)sender.sourceViewController;
     NSString *fullAddr=[NSString stringWithFormat:@"%@ %@ %@ %@ %@",editVC.addr1.text,editVC.addr2.text,editVC.city.text,editVC.state.text,editVC.zip.text];
     NSLog(@"Will be looking for: %@",fullAddr);

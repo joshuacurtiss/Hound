@@ -7,7 +7,6 @@
 //
 
 #import "addressEditViewController.h"
-#import "Person.h"
 
 @interface addressEditViewController ()
 @property (nonatomic, strong) UIPopoverController *popOver;
@@ -41,9 +40,11 @@
         zip.text=address.zip;
         phone.text=address.phone;
         notes.text=address.notes;
-        Person *p=address.person;
-        NSLog(@"%@ %@",address,p);
-        if( p!=nil ) [self setNewPerson:p];
+        person=address.person;
+    }
+    if( person!=nil )
+    {
+        [self setNewPerson:person];
     }
     [addr1 becomeFirstResponder];
 }
@@ -64,6 +65,7 @@
 
 - (void) setNewPerson:(Person *)newperson
 {
+    NSLog(@"Set new person to: %@ %@.", newperson.fname, newperson.lname);
     person=newperson;
     [name setTitle:[NSString stringWithFormat:@"%@ %@",person.fname, person.lname] forState:UIControlStateNormal];
 }

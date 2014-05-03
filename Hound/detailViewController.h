@@ -7,8 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Person.h"
+#import "Address.h"
 
 @interface detailViewController : UIViewController
-@property (strong, nonatomic) IBOutlet UILabel *nameLabel;
-@property (strong) NSManagedObject *person;
+@property (strong) Person *person;
+@property (strong, nonatomic) IBOutlet UITextView *notes;
+@property (strong, nonatomic) NSMutableArray *addresses;
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
 @end
