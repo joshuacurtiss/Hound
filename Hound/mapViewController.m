@@ -29,6 +29,10 @@
 {
     [super viewDidLoad];
     [self getLoc];
+}
+
+- (void) viewDidAppear:(BOOL)animated
+{
     [self pinAllAddresses];
 }
 
@@ -66,6 +70,7 @@
                          point.title=title;
                          point.subtitle=addr;
                          [mapview addAnnotation:point];
+                         NSLog(@"Pinned %@.",location);
                      }
                  }
      ];
@@ -77,6 +82,7 @@
     point.coordinate = coords;
     point.title=title;
     [mapview addAnnotation:point];
+    NSLog(@"Pinned %f, %f", point.coordinate.longitude, point.coordinate.latitude);
     return point;
 }
 
