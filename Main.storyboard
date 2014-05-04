@@ -18,6 +18,7 @@
                         <segue destination="y1C-0l-b7D" kind="relationship" relationship="viewControllers" id="xZm-Jk-j83"/>
                         <segue destination="McM-Uy-mzF" kind="relationship" relationship="viewControllers" id="beJ-cS-XFk"/>
                         <segue destination="65a-6d-AHM" kind="relationship" relationship="viewControllers" id="L0m-oN-bzl"/>
+                        <segue destination="Gpn-5u-K1f" kind="relationship" relationship="viewControllers" id="78F-QI-8FS"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rhb-lK-pUj" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -622,11 +623,81 @@
             </objects>
             <point key="canvasLocation" x="390" y="310"/>
         </scene>
+        <!--Map Lookup View Controller - Address Lookup (Experimental)-->
+        <scene sceneID="y9N-fW-On0">
+            <objects>
+                <viewController id="dhQ-an-GlT" customClass="mapLookupViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="egN-e5-HDQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="HXl-M8-pGo"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="fxQ-81-spX">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="PTg-Ju-o27">
+                                <rect key="frame" x="109" y="174" width="551" height="550"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </mapView>
+                            <searchBar contentMode="redraw" fixedFrame="YES" prompt="Search for an Address" placeholder="Type address here" translatesAutoresizingMaskIntoConstraints="NO" id="Hfs-3Q-bhq">
+                                <rect key="frame" x="109" y="100" width="551" height="75"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
+                                <scopeButtonTitles>
+                                    <string>Title</string>
+                                    <string>Title</string>
+                                </scopeButtonTitles>
+                                <connections>
+                                    <outlet property="delegate" destination="dhQ-an-GlT" id="Q3V-uK-Dob"/>
+                                </connections>
+                            </searchBar>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CGs-Sk-JTP">
+                                <rect key="frame" x="303" y="777" width="269" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" showsHorizontalScrollIndicator="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uMQ-jE-Xpt">
+                                <rect key="frame" x="303" y="827" width="269" height="100"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Coordinates:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QJh-Jf-nUI">
+                                <rect key="frame" x="196" y="781" width="99" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Address:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pDC-7w-rmY">
+                                <rect key="frame" x="227" y="833" width="68" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Address Lookup (Experimental)" id="WQx-CA-YeG"/>
+                    <connections>
+                        <outlet property="mapview" destination="PTg-Ju-o27" id="LpN-Ix-LP0"/>
+                        <outlet property="searchbar" destination="Hfs-3Q-bhq" id="S5Z-fu-6ZT"/>
+                        <outlet property="txtAddress" destination="uMQ-jE-Xpt" id="dVl-cZ-30H"/>
+                        <outlet property="txtCoordinates" destination="CGs-Sk-JTP" id="kaH-TN-dRM"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2S0-Ho-2Yq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1374" y="2674"/>
+        </scene>
         <!--Navigation Controller - Map-->
         <scene sceneID="v73-NT-TgM">
             <objects>
                 <navigationController title="Map" automaticallyAdjustsScrollViewInsets="NO" id="65a-6d-AHM" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Map" image="map.png" id="W3Y-Cf-p13"/>
+                    <tabBarItem key="tabBarItem" title="Map" image="map2.png" id="W3Y-Cf-p13"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="xCp-Po-MUL">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
@@ -645,12 +716,32 @@
             </objects>
             <point key="canvasLocation" x="400" y="1507"/>
         </scene>
+        <!--Navigation Controller - Experimental-->
+        <scene sceneID="z5v-cY-b4N">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Gpn-5u-K1f" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Experimental" image="map.png" id="atU-0Q-x5c"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ZmJ-SA-Sqm">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="dhQ-an-GlT" kind="relationship" relationship="rootViewController" id="30v-rC-Tdq"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2AA-Uu-Ac3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="400" y="2674"/>
+        </scene>
     </scenes>
     <resources>
         <image name="add.png" width="28" height="25"/>
         <image name="home-add.png" width="29" height="30"/>
         <image name="home.png" width="29" height="30"/>
         <image name="map.png" width="30" height="30"/>
+        <image name="map2.png" width="29" height="28"/>
         <image name="near-me.png" width="30" height="30"/>
         <image name="people.png" width="30" height="23"/>
     </resources>
