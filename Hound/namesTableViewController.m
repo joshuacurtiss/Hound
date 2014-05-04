@@ -34,6 +34,7 @@
 {
     [super viewDidLoad];
     self.navigationItem.leftBarButtonItem=self.editButtonItem;
+    //[self.tabBarController setSelectedIndex:3]; // Debugging line to go straight to a particular view. Left for reference.
 }
 
 - (void) viewWillAppear:(BOOL)animated
