@@ -12,6 +12,10 @@
 #import "houndAppDelegate.h"
 
 @interface namesTableViewController ()
+{
+    NSMutableDictionary *dataDict;
+    NSArray *sectionTitles;
+}
 @end
 
 @implementation namesTableViewController
@@ -49,6 +53,15 @@
                                  [NSSortDescriptor sortDescriptorWithKey:@"fname" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)], nil]];
     NSError *error;
     data=[[context executeFetchRequest:request error:&error] mutableCopy];
+    dataDict=[[NSMutableDictionary alloc] init];
+    for( int i=0 ; i<data.count ; i++ )
+    {
+        Person *p=data[i];
+        NSString *letter = [p.lname substringToIndex:1];
+        if( !dataDict[letter] ) dataDict[letter]=[NSMutableArray arrayWithObjects:nil];
+        [dataDict[letter] addObject:p];
+    }
+    sectionTitles=[[dataDict allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
     [self.tableView reloadData];
 }
 
@@ -61,24 +74,32 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    // Return the number of sections.
-    return 1;
+    return sectionTitles.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // Return the number of rows in the section.
-    return [data count];
+    NSString *secTitle=sectionTitles[section];
+    NSArray *sec=dataDict[secTitle];
+    return sec.count;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    return sectionTitles[section];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *cellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
+    NSString *secTitle=sectionTitles[indexPath.section];
+    NSArray *sec=dataDict[secTitle];
     if( cell==nil )
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-    NSManagedObject *person=[data objectAtIndex:indexPath.row];
-    cell.textLabel.text=[NSString stringWithFormat:@"%@, %@", [person valueForKey:@"lname"], [person valueForKey:@"fname"]];
+    Person *person=sec[indexPath.row];
+    NSLog(@"Section %d Row %d = %@", indexPath.section, indexPath.row, person);
+    cell.textLabel.text=[NSString stringWithFormat:@"%@, %@", person.lname, person.fname];
     return cell;
 }
 
@@ -120,16 +141,24 @@
     NSManagedObjectContext *context = [appDelegate managedObjectContext];
     if( editingStyle==UITableViewCellEditingStyleDelete )
     {
-        [context deleteObject:[data objectAtIndex:indexPath.row]];
+        NSString *secTitle=sectionTitles[indexPath.section];
+        NSArray *sec=dataDict[secTitle];
+        Person *p=sec[indexPath.row];
+        [context deleteObject:p];
         NSError *error=nil;
         if(![context save:&error] )
         {
             NSLog(@"Can't delete! %@ %@",error, [error localizedDescription]);
             return;
         }
-        [data removeObjectAtIndex:indexPath.row];
+        [dataDict[secTitle] removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }
+}
+
+- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
+{
+    return sectionTitles;
 }
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -138,8 +167,9 @@
     {
         detailViewController *detailVC = [segue destinationViewController];
         NSIndexPath *myIndexPath = [self.tableView indexPathForSelectedRow];
-        int row=[myIndexPath row];
-        detailVC.person = [data objectAtIndex:row];
+        NSString *secTitle=sectionTitles[myIndexPath.section];
+        NSArray *sec=dataDict[secTitle];
+        detailVC.person = sec[myIndexPath.row];
     }
 }
 
