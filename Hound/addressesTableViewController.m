@@ -12,6 +12,11 @@
 #import "houndAppDelegate.h"
 
 @interface addressesTableViewController ()
+{
+    NSString *sortField;
+    NSMutableDictionary *dataDict;
+    NSArray *sectionTitles;
+}
 @end
 
 @implementation addressesTableViewController
@@ -29,7 +34,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.navigationItem.leftBarButtonItem=self.editButtonItem;
+    sortField=@"city";
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -45,12 +50,20 @@
     NSEntityDescription *entityDesc = [NSEntityDescription entityForName:@"Address" inManagedObjectContext:context];
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     [request setEntity:entityDesc];
-    [request setSortDescriptors:[NSArray arrayWithObjects:[NSSortDescriptor sortDescriptorWithKey:@"state" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)],
-                                 [NSSortDescriptor sortDescriptorWithKey:@"city" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)],
-                                 [NSSortDescriptor sortDescriptorWithKey:@"addr1" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)],
-                                 [NSSortDescriptor sortDescriptorWithKey:@"addr2" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)], nil]];
+    [request setSortDescriptors:[NSArray arrayWithObjects:[NSSortDescriptor sortDescriptorWithKey:sortField ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)],
+                                                          [NSSortDescriptor sortDescriptorWithKey:@"addr1" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)],
+                                                          [NSSortDescriptor sortDescriptorWithKey:@"addr2" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)], nil]];
     NSError *error;
     data=[[context executeFetchRequest:request error:&error] mutableCopy];
+    dataDict=[[NSMutableDictionary alloc] init];
+    for( int i=0 ; i<data.count ; i++ )
+    {
+        Address *addr=data[i];
+        NSString *sec = [addr valueForKeyPath:sortField];
+        if( !dataDict[sec] ) dataDict[sec]=[NSMutableArray arrayWithObjects:nil];
+        [dataDict[sec] addObject:addr];
+    }
+    sectionTitles=[[dataDict allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
     [self.tableView reloadData];
 }
 
@@ -63,14 +76,19 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    // Return the number of sections.
-    return 1;
+    return [sectionTitles count];
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    return [sectionTitles objectAtIndex:section];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // Return the number of rows in the section.
-    return [data count];
+    NSString *secTitle=sectionTitles[section];
+    NSArray *sec=dataDict[secTitle];
+    return sec.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -79,8 +97,10 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
     if( cell==nil )
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-    Address *obj=[data objectAtIndex:indexPath.row];
-    cell.textLabel.text=[NSString stringWithFormat:@"%@ %@", obj.addr1, obj.addr2];
+    NSString *secTitle=sectionTitles[indexPath.section];
+    NSArray *sec=dataDict[secTitle];
+    Address *addr=sec[indexPath.row];
+    cell.textLabel.text=[NSString stringWithFormat:@"%@", [self formatAddress:addr]];
     return cell;
 }
 
@@ -133,14 +153,17 @@
     NSManagedObjectContext *context = [appDelegate managedObjectContext];
     if( editingStyle==UITableViewCellEditingStyleDelete )
     {
-        [context deleteObject:[data objectAtIndex:indexPath.row]];
+        NSString *secTitle=sectionTitles[indexPath.section];
+        NSArray *sec=dataDict[secTitle];
+        Address *addr=sec[indexPath.row];
+        [context deleteObject:addr];
         NSError *error=nil;
         if(![context save:&error] )
         {
             NSLog(@"Can't delete! %@ %@",error, [error localizedDescription]);
             return;
         }
-        [data removeObjectAtIndex:indexPath.row];
+        [dataDict[secTitle] removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }
 }
@@ -151,9 +174,31 @@
     {
         addressDetailViewController *detailVC = [segue destinationViewController];
         NSIndexPath *myIndexPath = [self.tableView indexPathForSelectedRow];
-        int row=[myIndexPath row];
-        detailVC.address = [data objectAtIndex:row];
+        NSString *secTitle=sectionTitles[myIndexPath.section];
+        NSArray *sec=dataDict[secTitle];
+        Address *addr=sec[myIndexPath.row];
+        detailVC.address = addr;
     }
 }
 
+- (NSString *) formatAddress:(Address *)addr
+{
+    NSString *out=[self trimString:addr.addr1];
+    if( [[self trimString:addr.addr2] length]>0 ) out=[NSString stringWithFormat:@"%@ %@",out,[self trimString:addr.addr2]];
+    if( [[self trimString:addr.city] length]>0 ) out=[NSString stringWithFormat:@"%@, %@",out,[self trimString:addr.city]];
+    if( [[self trimString:addr.state] length]>0 || [[self trimString:addr.zip] length]>0 ) out=[NSString stringWithFormat:@"%@, %@",out,[self trimString:[NSString stringWithFormat:@"%@ %@",addr.state,addr.zip]]];
+    return out;
+}
+
+- (NSString *) trimString:(NSString *)str
+{
+    return [str stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+}
+
+- (IBAction)sortFieldChanged:(id)sender
+{
+    sortField=(((UISegmentedControl *) sender).selectedSegmentIndex==0)?@"city":@"zip";
+    NSLog(@"Changed sort to %@.",sortField);
+    [self refreshTable];
+}
 @end

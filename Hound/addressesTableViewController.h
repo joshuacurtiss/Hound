@@ -14,4 +14,6 @@
 @interface addressesTableViewController : UITableViewController <UITableViewDataSource, UITableViewDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray *data;
+- (IBAction)sortFieldChanged:(id)sender;
+
 @end

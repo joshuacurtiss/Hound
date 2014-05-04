@@ -51,6 +51,19 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Addresses" id="jjs-tf-qeT">
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="Udj-he-Oz6">
+                            <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="5Fq-t9-aV1">
+                                <rect key="frame" x="16" y="7" width="170" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <segments>
+                                    <segment title="City"/>
+                                    <segment title="Zip"/>
+                                </segments>
+                                <connections>
+                                    <action selector="sortFieldChanged:" destination="MMk-cJ-He9" eventType="valueChanged" id="eBv-CA-dxY"/>
+                                </connections>
+                            </segmentedControl>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="home-add.png" id="gRP-hS-CxA">
                             <connections>
                                 <segue destination="9IX-dM-LSE" kind="modal" identifier="New" modalPresentationStyle="formSheet" id="o2v-p5-hwt"/>
@@ -647,8 +660,8 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="it3-kl-4b1"/>
-        <segue reference="JZB-4C-0eh"/>
-        <segue reference="LTV-oy-TYk"/>
+        <segue reference="o2v-p5-hwt"/>
+        <segue reference="DcO-DJ-SS2"/>
+        <segue reference="8eL-Fl-SWz"/>
     </inferredMetricsTieBreakers>
 </document>
