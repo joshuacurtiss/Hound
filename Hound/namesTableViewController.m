@@ -99,7 +99,6 @@
     if( cell==nil )
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     Person *person=sec[indexPath.row];
-    NSLog(@"Section %d Row %d = %@", indexPath.section, indexPath.row, person);
     cell.textLabel.text=[NSString stringWithFormat:@"%@, %@", person.lname, person.fname];
     return cell;
 }
