@@ -11,7 +11,7 @@
         <attribute name="phoneType" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="state" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="zip" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="person" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Person" inverseName="addresses" inverseEntity="Person" syncable="YES"/>
+        <relationship name="person" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Person" inverseName="addresses" inverseEntity="Person" syncable="YES"/>
     </entity>
     <entity name="Person" representedClassName="Person" syncable="YES">
         <attribute name="fname" optional="YES" attributeType="String" syncable="YES"/>
