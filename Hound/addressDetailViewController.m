@@ -42,6 +42,7 @@
     self.addrText.text=[NSString stringWithFormat:@"%@\n%@\n\n",fullName,[self formatAddressMultiline:address]];
     if( [address.phone length]>0 ) self.addrText.text=[NSString stringWithFormat:@"%@Phone: %@",self.addrText.text,address.phone];
     self.noteText.text=address.notes;
+    [mapview removeAnnotations:mapview.annotations];
     CLLocationCoordinate2D coord=CLLocationCoordinate2DMake( [[address valueForKey:@"latitude"] doubleValue], [[address valueForKey:@"longitude"] doubleValue] );
     [self showClusterPoint:coord withTitle:fullName withSubtitle:[self formatAddressSingleLine:address]];
     mapview.showsUserLocation = YES;
