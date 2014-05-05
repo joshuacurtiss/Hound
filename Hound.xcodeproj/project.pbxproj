@@ -44,6 +44,9 @@
 		03D776271910C90900E3BF53 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03D776261910C90900E3BF53 /* MapKit.framework */; };
 		03D7762A1910C95500E3BF53 /* mapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03D776291910C95500E3BF53 /* mapViewController.m */; };
 		395BD1F21910476800F3B75F /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 395BD1F11910476800F3B75F /* Person.m */; };
+		395CC51A191840A600328E0F /* helpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 395CC519191840A600328E0F /* helpViewController.m */; };
+		395CC51C191843D100328E0F /* help.png in Resources */ = {isa = PBXBuildFile; fileRef = 395CC51B191843D100328E0F /* help.png */; };
+		395CC51E191843DD00328E0F /* Instructions.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 395CC51D191843DD00328E0F /* Instructions.pdf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,6 +111,10 @@
 		03D776291910C95500E3BF53 /* mapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = mapViewController.m; sourceTree = "<group>"; };
 		395BD1F01910476800F3B75F /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
 		395BD1F11910476800F3B75F /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
+		395CC518191840A600328E0F /* helpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = helpViewController.h; sourceTree = "<group>"; };
+		395CC519191840A600328E0F /* helpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = helpViewController.m; sourceTree = "<group>"; };
+		395CC51B191843D100328E0F /* help.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = help.png; sourceTree = "<group>"; };
+		395CC51D191843DD00328E0F /* Instructions.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = Instructions.pdf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -191,7 +198,6 @@
 		036C6FF1190F51CE00856637 = {
 			isa = PBXGroup;
 			children = (
-				036C7034190F570D00856637 /* Images */,
 				036C7005190F51CF00856637 /* Hound */,
 				036C7022190F51CF00856637 /* HoundTests */,
 				036C6FFC190F51CF00856637 /* Frameworks */,
@@ -227,11 +233,14 @@
 				036C7032190F51DD00856637 /* Main.storyboard */,
 				036C700E190F51CF00856637 /* houndAppDelegate.h */,
 				036C700F190F51CF00856637 /* houndAppDelegate.m */,
+				395CC518191840A600328E0F /* helpViewController.h */,
+				395CC519191840A600328E0F /* helpViewController.m */,
 				0325DBC619133AF600921A22 /* Address */,
 				0325DBC519133AEF00921A22 /* Person */,
 				0325DBCB19133B8A00921A22 /* Map */,
 				0325DBCA19133B4B00921A22 /* Model */,
 				036C7014190F51CF00856637 /* Images.xcassets */,
+				036C7034190F570D00856637 /* Images */,
 				036C7006190F51CF00856637 /* Supporting Files */,
 			);
 			path = Hound;
@@ -240,6 +249,7 @@
 		036C7006190F51CF00856637 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				395CC51D191843DD00328E0F /* Instructions.pdf */,
 				036C7007190F51CF00856637 /* Hound-Info.plist */,
 				036C7008190F51CF00856637 /* InfoPlist.strings */,
 				036C700B190F51CF00856637 /* main.m */,
@@ -269,6 +279,7 @@
 		036C7034190F570D00856637 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				395CC51B191843D100328E0F /* help.png */,
 				03877A551915EF1000F69FF7 /* map2.png */,
 				03BB39F81911B89E0057A961 /* home-add.png */,
 				03BB39F11911AE850057A961 /* near-me.png */,
@@ -280,6 +291,7 @@
 				033219B2190F591C00998CC3 /* home.png */,
 			);
 			name = Images;
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -373,11 +385,13 @@
 				03BB39F91911B89E0057A961 /* home-add.png in Resources */,
 				036C700A190F51CF00856637 /* InfoPlist.strings in Resources */,
 				03BB39F31911AE850057A961 /* near-me.png in Resources */,
+				395CC51C191843D100328E0F /* help.png in Resources */,
 				036C7015190F51CF00856637 /* Images.xcassets in Resources */,
 				033219B4190F591C00998CC3 /* people.png in Resources */,
 				03BB39F41911AE850057A961 /* trash.png in Resources */,
 				033219B7190F61CD00998CC3 /* hound.png in Resources */,
 				03877A561915EF1000F69FF7 /* map2.png in Resources */,
+				395CC51E191843DD00328E0F /* Instructions.pdf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -406,6 +420,7 @@
 				395BD1F21910476800F3B75F /* Person.m in Sources */,
 				03D7762A1910C95500E3BF53 /* mapViewController.m in Sources */,
 				03877A591915F21E00F69FF7 /* mapLookupViewController.m in Sources */,
+				395CC51A191840A600328E0F /* helpViewController.m in Sources */,
 				03A0C6861914B9220043EF9B /* namePopoverViewController.m in Sources */,
 				033219CD190F787300998CC3 /* addressesTableViewController.m in Sources */,
 				036C7013190F51CF00856637 /* Hound.xcdatamodeld in Sources */,

@@ -18,6 +18,7 @@
                         <segue destination="y1C-0l-b7D" kind="relationship" relationship="viewControllers" id="xZm-Jk-j83"/>
                         <segue destination="McM-Uy-mzF" kind="relationship" relationship="viewControllers" id="beJ-cS-XFk"/>
                         <segue destination="65a-6d-AHM" kind="relationship" relationship="viewControllers" id="L0m-oN-bzl"/>
+                        <segue destination="xfB-cZ-Lnl" kind="relationship" relationship="viewControllers" id="IEv-pa-vgb"/>
                         <segue destination="Gpn-5u-K1f" kind="relationship" relationship="viewControllers" id="78F-QI-8FS"/>
                     </connections>
                 </tabBarController>
@@ -693,6 +694,35 @@
             </objects>
             <point key="canvasLocation" x="1374" y="2674"/>
         </scene>
+        <!--Help View Controller - Help-->
+        <scene sceneID="fUP-mw-ae0">
+            <objects>
+                <viewController id="RGK-ew-g6C" customClass="helpViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="cfU-cj-aOz"/>
+                        <viewControllerLayoutGuide type="bottom" id="KFN-5J-vyg"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="2RX-3R-agJ">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dXf-bG-2e2">
+                                <rect key="frame" x="0.0" y="64" width="768" height="911"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Help" id="nI9-fx-E5Z"/>
+                    <connections>
+                        <outlet property="webview" destination="dXf-bG-2e2" id="4f4-kw-1Ur"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Xjq-iV-GCQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1374" y="3846"/>
+        </scene>
         <!--Navigation Controller - Map-->
         <scene sceneID="v73-NT-TgM">
             <objects>
@@ -735,9 +765,29 @@
             </objects>
             <point key="canvasLocation" x="400" y="2674"/>
         </scene>
+        <!--Navigation Controller - Help-->
+        <scene sceneID="dfx-Pd-Qgy">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="xfB-cZ-Lnl" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Help" image="help.png" id="xPe-EU-8cf"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="xmd-JB-ldP">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="RGK-ew-g6C" kind="relationship" relationship="rootViewController" id="fZX-6r-ndy"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CNG-v3-3gw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="400" y="3846"/>
+        </scene>
     </scenes>
     <resources>
         <image name="add.png" width="28" height="25"/>
+        <image name="help.png" width="27" height="27"/>
         <image name="home-add.png" width="29" height="30"/>
         <image name="home.png" width="29" height="30"/>
         <image name="map.png" width="30" height="30"/>
