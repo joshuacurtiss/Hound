@@ -53,7 +53,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Addresses" id="jjs-tf-qeT">
-                        <barButtonItem key="leftBarButtonItem" style="plain" id="Udj-he-Oz6">
+                        <barButtonItem key="leftBarButtonItem" id="Udj-he-Oz6">
                             <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="5Fq-t9-aV1">
                                 <rect key="frame" x="16" y="7" width="170" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -103,7 +103,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Map" id="Xpa-NP-ksr">
-                        <barButtonItem key="leftBarButtonItem" style="plain" id="4Fk-QF-MtA">
+                        <barButtonItem key="leftBarButtonItem" id="4Fk-QF-MtA">
                             <segmentedControl key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bar" selectedSegmentIndex="0" id="cqd-AV-3l4">
                                 <rect key="frame" x="16" y="7" width="225" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -117,7 +117,7 @@
                                 </connections>
                             </segmentedControl>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" image="near-me.png" style="plain" id="RTf-PH-NG4">
+                        <barButtonItem key="rightBarButtonItem" image="near-me.png" id="RTf-PH-NG4">
                             <connections>
                                 <action selector="getLocation:" destination="0pD-xQ-GkS" id="yLq-U3-0hn"/>
                             </connections>
@@ -207,7 +207,6 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" address="YES"/>
                             </textView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="First Name:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BxE-VW-Xef">
                                 <rect key="frame" x="20" y="80" width="89" height="21"/>
@@ -418,7 +417,6 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" address="YES"/>
                             </textView>
                             <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tmt-iR-sf7">
                                 <rect key="frame" x="0.0" y="0.0" width="540" height="44"/>
@@ -801,8 +799,8 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="LTV-oy-TYk"/>
-        <segue reference="ATj-zp-Wr6"/>
+        <segue reference="DcO-DJ-SS2"/>
         <segue reference="JZB-4C-0eh"/>
+        <segue reference="o2v-p5-hwt"/>
     </inferredMetricsTieBreakers>
 </document>
