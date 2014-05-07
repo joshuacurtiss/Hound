@@ -56,28 +56,6 @@
     }
 }
 
-- (void) pinAddress:(NSString *)addr withTitle:(NSString *)title
-{
-    NSString *location = addr;
-    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
-    [geocoder geocodeAddressString:location
-                 completionHandler:^(NSArray* placemarks, NSError* error)
-                 {
-                     if (placemarks && placemarks.count > 0)
-                     {
-                         CLPlacemark *topResult = [placemarks objectAtIndex:0];
-                         MKPlacemark *placemark = [[MKPlacemark alloc] initWithPlacemark:topResult];
-                         MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
-                         point.coordinate=placemark.coordinate;
-                         point.title=title;
-                         point.subtitle=addr;
-                         [mapview addAnnotation:point];
-                         NSLog(@"Pinned %@.",location);
-                     }
-                 }
-     ];
-}
-
 -(MKPointAnnotation *)pinClusterPoint:(CLLocationCoordinate2D)coords withTitle:(NSString *)title withSubTitle:(NSString *)subtitle
 {
     MKPointAnnotation *point = [[MKPointAnnotation alloc]init];
@@ -124,12 +102,6 @@
     [mapview setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
     MKCoordinateRegion region=MKCoordinateRegionMakeWithDistance(self.mapview.userLocation.coordinate, 4000, 4000);
     [mapview setRegion:region animated:YES];
-}
-
--(IBAction)getDirections:(id)sender
-{
-    NSString *urlString=@"http://maps.apple.com/maps?daddr=40.707184,-73.998392";
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
 }
 
 - (NSString *) formatAddress:(Address *)addr
