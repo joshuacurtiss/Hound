@@ -15,6 +15,7 @@
 {
     NSMutableDictionary *dataDict;
     NSArray *sectionTitles;
+    Person *myNewPerson;
 }
 @end
 
@@ -119,9 +120,13 @@
         [newPerson setValue:editVC.notes.text forKey:@"notes"];
         NSError *error=nil;
         if( ![context save:&error] ) NSLog(@"Save failed! %@ %@",error, [error localizedDescription]);
+        myNewPerson=(Person *)newPerson;
     }
     [self refreshTable];
-    [editVC dismissViewControllerAnimated:YES completion:nil];
+    [editVC dismissViewControllerAnimated:YES completion:^
+     {
+         [self performSegueWithIdentifier:@"Show" sender:myNewPerson];
+     }];
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -158,13 +163,21 @@
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    NSString *senderClass=[NSString stringWithFormat:@"%@",[sender class]];
     if( [[segue identifier] isEqualToString:@"Show"] )
     {
         detailViewController *detailVC = [segue destinationViewController];
-        NSIndexPath *myIndexPath = [self.tableView indexPathForSelectedRow];
-        NSString *secTitle=sectionTitles[myIndexPath.section];
-        NSArray *sec=dataDict[secTitle];
-        detailVC.person = sec[myIndexPath.row];
+        if( [senderClass isEqualToString:@"Person"] )
+        {
+            detailVC.person=(Person *)sender;
+        }
+        else
+        {
+            NSIndexPath *myIndexPath = [self.tableView indexPathForSelectedRow];
+            NSString *secTitle=sectionTitles[myIndexPath.section];
+            NSArray *sec=dataDict[secTitle];
+            detailVC.person = sec[myIndexPath.row];
+        }
     }
 }
 
