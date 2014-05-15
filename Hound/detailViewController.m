@@ -58,62 +58,70 @@
 
 - (IBAction)unwindToTableViewController:(UIStoryboardSegue *)sender
 {
-    personEditViewController *editVC = (personEditViewController *)sender.sourceViewController;
-    NSString *newname = [NSString stringWithFormat:@"%@ %@",editVC.fname.text,editVC.lname.text] ;
-    if( ![newname length]==0 && ![[newname stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] length]==0 )
+    NSString *sourceClass=[NSString stringWithFormat:@"%@",[sender.sourceViewController class]];
+    NSLog(@"Unwinding for a %@ view controller.",sourceClass);
+    if( [sourceClass isEqualToString:@"personEditViewController"] )
     {
-        houndAppDelegate *appDelegate=[[UIApplication sharedApplication] delegate];
-        NSManagedObjectContext *context = [appDelegate managedObjectContext];
-        [person setValue:editVC.fname.text forKey:@"fname"];
-        [person setValue:editVC.lname.text forKey:@"lname"];
-        [person setValue:editVC.notes.text forKey:@"notes"];
-        NSError *error=nil;
-        if( ![context save:&error] ) NSLog(@"Save failed! %@ %@",error, [error localizedDescription]);
+        personEditViewController *editVC = (personEditViewController *)sender.sourceViewController;
+        NSString *newname = [NSString stringWithFormat:@"%@ %@",editVC.fname.text,editVC.lname.text] ;
+        if( ![newname length]==0 && ![[newname stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] length]==0 )
+        {
+            houndAppDelegate *appDelegate=[[UIApplication sharedApplication] delegate];
+            NSManagedObjectContext *context = [appDelegate managedObjectContext];
+            [person setValue:editVC.fname.text forKey:@"fname"];
+            [person setValue:editVC.lname.text forKey:@"lname"];
+            [person setValue:editVC.notes.text forKey:@"notes"];
+            NSError *error=nil;
+            if( ![context save:&error] ) NSLog(@"Save failed! %@ %@",error, [error localizedDescription]);
+        }
+        [self refreshView];
+        [editVC dismissViewControllerAnimated:YES completion:nil];
     }
-    [self refreshView];
-    [editVC dismissViewControllerAnimated:YES completion:nil];
-    /*
-    NSLog(@"Unwinding to table detail view controller.");
-    addressEditViewController *editVC = (addressEditViewController *)sender.sourceViewController;
-    NSString *fullAddr=[NSString stringWithFormat:@"%@ %@ %@ %@ %@",editVC.addr1.text,editVC.addr2.text,editVC.city.text,editVC.state.text,editVC.zip.text];
-    NSLog(@"Will be looking for: %@",fullAddr);
-    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
-    [geocoder geocodeAddressString:fullAddr
-                 completionHandler:^(NSArray* placemarks, NSError* error)
-     {
-         if (placemarks && placemarks.count > 0)
+    else if( [sourceClass isEqualToString:@"addressEditViewController"] )
+    {
+        addressEditViewController *editVC = (addressEditViewController *)sender.sourceViewController;
+        NSString *fullAddr=[NSString stringWithFormat:@"%@ %@ %@ %@ %@",editVC.addr1.text,editVC.addr2.text,editVC.city.text,editVC.state.text,editVC.zip.text];
+        NSLog(@"Will be looking for: %@",fullAddr);
+        CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+        [geocoder geocodeAddressString:fullAddr
+                     completionHandler:^(NSArray* placemarks, NSError* error)
          {
-             CLPlacemark *topResult = [placemarks objectAtIndex:0];
-             MKPlacemark *placemark = [[MKPlacemark alloc] initWithPlacemark:topResult];
-             NSLog(@"Coordinates are: %f, %f", placemark.coordinate.longitude, placemark.coordinate.latitude);
-             houndAppDelegate *appDelegate=[[UIApplication sharedApplication] delegate];
-             NSManagedObjectContext *context = [appDelegate managedObjectContext];
-             NSIndexPath *myIndexPath = [self.tableView indexPathForSelectedRow];
-             int row=[myIndexPath row];
-             Address *address=[addresses objectAtIndex:row];
-             [address setValue:editVC.addr1.text forKey:@"addr1"];
-             [address setValue:editVC.addr2.text forKey:@"addr2"];
-             [address setValue:editVC.city.text forKey:@"city"];
-             [address setValue:editVC.state.text forKey:@"state"];
-             [address setValue:editVC.zip.text forKey:@"zip"];
-             [address setValue:editVC.phone.text forKey:@"phone"];
-             [address setValue:editVC.notes.text forKey:@"notes"];
-             [address setValue:[NSNumber numberWithDouble:placemark.coordinate.longitude] forKey:@"longitude"];
-             [address setValue:[NSNumber numberWithDouble:placemark.coordinate.latitude] forKey:@"latitude"];
-             address.person=editVC.person;
-             NSError *error=nil;
-             if( ![context save:&error] ) NSLog(@"Save failed! %@ %@",error, [error localizedDescription]);
-             [self refreshView];
-             [editVC dismissViewControllerAnimated:YES completion:nil];
+             if (placemarks && placemarks.count > 0)
+             {
+                 CLPlacemark *topResult = [placemarks objectAtIndex:0];
+                 MKPlacemark *placemark = [[MKPlacemark alloc] initWithPlacemark:topResult];
+                 NSLog(@"Coordinates are: %f, %f", placemark.coordinate.longitude, placemark.coordinate.latitude);
+                 houndAppDelegate *appDelegate=[[UIApplication sharedApplication] delegate];
+                 NSManagedObjectContext *context = [appDelegate managedObjectContext];
+                 Address *newObj;
+                 newObj=[NSEntityDescription insertNewObjectForEntityForName:@"Address" inManagedObjectContext:context];
+                 [newObj setValue:editVC.addr1.text forKey:@"addr1"];
+                 [newObj setValue:editVC.addr2.text forKey:@"addr2"];
+                 [newObj setValue:editVC.city.text forKey:@"city"];
+                 [newObj setValue:editVC.state.text forKey:@"state"];
+                 [newObj setValue:editVC.zip.text forKey:@"zip"];
+                 [newObj setValue:editVC.phone.text forKey:@"phone"];
+                 [newObj setValue:editVC.notes.text forKey:@"notes"];
+                 [newObj setValue:[NSNumber numberWithDouble:placemark.coordinate.longitude] forKey:@"longitude"];
+                 [newObj setValue:[NSNumber numberWithDouble:placemark.coordinate.latitude] forKey:@"latitude"];
+                 newObj.person=editVC.person;
+                 NSError *error=nil;
+                 if( ![context save:&error] ) NSLog(@"Save failed! %@ %@",error, [error localizedDescription]);
+                 [self refreshView];
+                 [editVC dismissViewControllerAnimated:YES completion:nil];
+             }
+             else
+             {
+                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Address not found" message: @"That address could not be found on the map!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                 [alert show];
+             }
          }
-         else
-         {
-             UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Address not found" message: @"That address could not be found on the map!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-             [alert show];
-         }
-     }
-     ];
-     */
+         ];
+    }
+    else
+    {
+        NSLog(@"Don't know what to do about it.");
+    }
 }
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
