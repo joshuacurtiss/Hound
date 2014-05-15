@@ -44,6 +44,7 @@
 		03BB39F91911B89E0057A961 /* home-add.png in Resources */ = {isa = PBXBuildFile; fileRef = 03BB39F81911B89E0057A961 /* home-add.png */; };
 		03D776271910C90900E3BF53 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03D776261910C90900E3BF53 /* MapKit.framework */; };
 		03D7762A1910C95500E3BF53 /* mapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03D776291910C95500E3BF53 /* mapViewController.m */; };
+		3927951F192562A20089A9AB /* Address+Setters.m in Sources */ = {isa = PBXBuildFile; fileRef = 3927951E192562A20089A9AB /* Address+Setters.m */; };
 		395BD1F21910476800F3B75F /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 395BD1F11910476800F3B75F /* Person.m */; };
 		395CC51A191840A600328E0F /* helpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 395CC519191840A600328E0F /* helpViewController.m */; };
 		395CC51C191843D100328E0F /* help.png in Resources */ = {isa = PBXBuildFile; fileRef = 395CC51B191843D100328E0F /* help.png */; };
@@ -112,6 +113,8 @@
 		03D776261910C90900E3BF53 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		03D776281910C95500E3BF53 /* mapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mapViewController.h; sourceTree = "<group>"; };
 		03D776291910C95500E3BF53 /* mapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = mapViewController.m; sourceTree = "<group>"; };
+		3927951D192562A20089A9AB /* Address+Setters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Address+Setters.h"; sourceTree = "<group>"; };
+		3927951E192562A20089A9AB /* Address+Setters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Address+Setters.m"; sourceTree = "<group>"; };
 		395BD1F01910476800F3B75F /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
 		395BD1F11910476800F3B75F /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
 		395CC518191840A600328E0F /* helpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = helpViewController.h; sourceTree = "<group>"; };
@@ -185,6 +188,8 @@
 				395BD1F11910476800F3B75F /* Person.m */,
 				033706F919252F640033E1B8 /* Person+Setters.h */,
 				033706FA19252F640033E1B8 /* Person+Setters.m */,
+				3927951D192562A20089A9AB /* Address+Setters.h */,
+				3927951E192562A20089A9AB /* Address+Setters.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -426,6 +431,7 @@
 				395BD1F21910476800F3B75F /* Person.m in Sources */,
 				03D7762A1910C95500E3BF53 /* mapViewController.m in Sources */,
 				03877A591915F21E00F69FF7 /* mapLookupViewController.m in Sources */,
+				3927951F192562A20089A9AB /* Address+Setters.m in Sources */,
 				395CC51A191840A600328E0F /* helpViewController.m in Sources */,
 				03A0C6861914B9220043EF9B /* namePopoverViewController.m in Sources */,
 				033219CD190F787300998CC3 /* addressesTableViewController.m in Sources */,
