@@ -10,15 +10,8 @@
 
 @implementation Person (Setters)
 
--(void) setFname:(NSString *)fname
-{
-    [self setTrimmedValue:fname forKey:@"fname"];
-}
-
--(void) setLname:(NSString *)lname
-{
-    [self setTrimmedValue:lname forKey:@"lname"];
-}
+-(void) setFname:(NSString *)fname {[self setTrimmedValue:fname forKey:@"fname"];}
+-(void) setLname:(NSString *)lname {[self setTrimmedValue:lname forKey:@"lname"];}
 
 -(void) setTrimmedValue:(NSString *)newval forKey:(NSString *)key
 {
