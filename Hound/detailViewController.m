@@ -36,6 +36,10 @@
     notes.layer.borderWidth = .5f;
     notes.layer.shadowColor = [UIColor lightGrayColor].CGColor;
     self.automaticallyAdjustsScrollViewInsets=NO;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
     [self refreshView];
 }
 
@@ -49,6 +53,7 @@
     {
         [addresses addObject:item];
     }
+    [tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning
