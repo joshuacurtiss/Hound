@@ -113,10 +113,10 @@
     {
         houndAppDelegate *appDelegate=[[UIApplication sharedApplication] delegate];
         NSManagedObjectContext *context = [appDelegate managedObjectContext];
-        NSManagedObjectContext *newPerson;
+        Person *newPerson;
         newPerson=[NSEntityDescription insertNewObjectForEntityForName:@"Person" inManagedObjectContext:context];
-        [newPerson setValue:editVC.fname.text forKey:@"fname"];
-        [newPerson setValue:editVC.lname.text forKey:@"lname"];
+        newPerson.fname=editVC.fname.text;
+        newPerson.lname=editVC.lname.text;
         [newPerson setValue:editVC.notes.text forKey:@"notes"];
         NSError *error=nil;
         if( ![context save:&error] ) NSLog(@"Save failed! %@ %@",error, [error localizedDescription]);

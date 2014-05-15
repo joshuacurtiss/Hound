@@ -19,6 +19,7 @@
 		033219D0190F861A00998CC3 /* detailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 033219CF190F861A00998CC3 /* detailViewController.m */; };
 		0333E1AA191201730057DCC3 /* addressEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0333E1A9191201730057DCC3 /* addressEditViewController.m */; };
 		0333E1AD191202740057DCC3 /* Address.m in Sources */ = {isa = PBXBuildFile; fileRef = 0333E1AC191202740057DCC3 /* Address.m */; };
+		033706FB19252F640033E1B8 /* Person+Setters.m in Sources */ = {isa = PBXBuildFile; fileRef = 033706FA19252F640033E1B8 /* Person+Setters.m */; };
 		036C6FFE190F51CF00856637 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 036C6FFD190F51CF00856637 /* Foundation.framework */; };
 		036C7000190F51CF00856637 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 036C6FFF190F51CF00856637 /* CoreGraphics.framework */; };
 		036C7002190F51CF00856637 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 036C7001190F51CF00856637 /* UIKit.framework */; };
@@ -79,6 +80,8 @@
 		0333E1A9191201730057DCC3 /* addressEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = addressEditViewController.m; sourceTree = "<group>"; };
 		0333E1AB191202740057DCC3 /* Address.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Address.h; sourceTree = "<group>"; };
 		0333E1AC191202740057DCC3 /* Address.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Address.m; sourceTree = "<group>"; };
+		033706F919252F640033E1B8 /* Person+Setters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Person+Setters.h"; sourceTree = "<group>"; };
+		033706FA19252F640033E1B8 /* Person+Setters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Person+Setters.m"; sourceTree = "<group>"; };
 		036C6FFA190F51CF00856637 /* Hound.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hound.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		036C6FFD190F51CF00856637 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		036C6FFF190F51CF00856637 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -180,6 +183,8 @@
 				0333E1AC191202740057DCC3 /* Address.m */,
 				395BD1F01910476800F3B75F /* Person.h */,
 				395BD1F11910476800F3B75F /* Person.m */,
+				033706F919252F640033E1B8 /* Person+Setters.h */,
+				033706FA19252F640033E1B8 /* Person+Setters.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -417,6 +422,7 @@
 				033219C1190F6D6D00998CC3 /* personEditViewController.m in Sources */,
 				033219D0190F861A00998CC3 /* detailViewController.m in Sources */,
 				036C7010190F51CF00856637 /* houndAppDelegate.m in Sources */,
+				033706FB19252F640033E1B8 /* Person+Setters.m in Sources */,
 				395BD1F21910476800F3B75F /* Person.m in Sources */,
 				03D7762A1910C95500E3BF53 /* mapViewController.m in Sources */,
 				03877A591915F21E00F69FF7 /* mapLookupViewController.m in Sources */,
