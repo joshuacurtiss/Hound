@@ -355,6 +355,9 @@
 					036C6FF9190F51CF00856637 = {
 						DevelopmentTeam = LAK6SGQ7Q5;
 						SystemCapabilities = {
+							com.apple.InterAppAudio = {
+								enabled = 0;
+							};
 							com.apple.iOS = {
 								enabled = 1;
 							};
@@ -561,6 +564,7 @@
 				GCC_PREFIX_HEADER = "Hound/Hound-Prefix.pch";
 				INFOPLIST_FILE = "Hound/Hound-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 2;
 				WRAPPER_EXTENSION = app;
 			};
@@ -577,6 +581,7 @@
 				GCC_PREFIX_HEADER = "Hound/Hound-Prefix.pch";
 				INFOPLIST_FILE = "Hound/Hound-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 2;
 				WRAPPER_EXTENSION = app;
 			};
