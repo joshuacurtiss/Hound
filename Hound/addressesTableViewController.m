@@ -56,10 +56,15 @@
     dataDict=[[NSMutableDictionary alloc] init];
     for( int i=0 ; i<data.count ; i++ )
     {
+        // Grabbing the address
         Address *addr=data[i];
+        // Creating entry in dictionary, and putting address in
         NSString *sec = [addr valueForKeyPath:sortField];
         if( !dataDict[sec] ) dataDict[sec]=[NSMutableArray arrayWithObjects:nil];
         [dataDict[sec] addObject:addr];
+        // Try to get coordinates if they're missing for this address
+        if( [addr.latitude isEqualToNumber:[NSNumber numberWithDouble:0.0]] && [addr.longitude isEqualToNumber:[NSNumber numberWithDouble:0.0]] )
+            [addrsvc findCoordsForAddress:addr completion:nil];
     }
     sectionTitles=[[dataDict allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
     [self.tableView reloadData];

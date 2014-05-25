@@ -10,6 +10,8 @@
 #import "personEditViewController.h"
 #import "detailViewController.h"
 #import "personService.h"
+#import "addressService.h"
+#import "Address+Setters.h"
 
 @interface namesTableViewController ()
 {
@@ -17,6 +19,7 @@
     NSArray *sectionTitles;
     Person *myNewPerson;
     personService *personsvc;
+    addressService *addrsvc;
 }
 @end
 
@@ -29,6 +32,7 @@
     if (self)
     {
         personsvc=[[personService alloc] init];
+        addrsvc=[[addressService alloc] init];
     }
     return self;
 }
@@ -39,6 +43,7 @@
     if (self)
     {
         personsvc=[[personService alloc] init];
+        addrsvc=[[addressService alloc] init];
     }
     return self;
 }
@@ -47,7 +52,7 @@
 {
     [super viewDidLoad];
     self.navigationItem.leftBarButtonItem=self.editButtonItem;
-    //[self.tabBarController setSelectedIndex:3]; // Debugging line to go straight to a particular view. Left for reference.
+    //[self.tabBarController setSelectedIndex:1]; // Debugging line to go straight to a particular view. Left for reference.
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -62,10 +67,17 @@
     dataDict=[[NSMutableDictionary alloc] init];
     for( int i=0 ; i<data.count ; i++ )
     {
+        // Handle adding person to dictionary
         Person *p=data[i];
         NSString *letter = [p.lname substringToIndex:1];
         if( !dataDict[letter] ) dataDict[letter]=[NSMutableArray arrayWithObjects:nil];
         [dataDict[letter] addObject:p];
+        // Check person's addresses for missing coordinates
+        for( Address *addr in p.addresses )
+        {
+            if( [addr.latitude isEqualToNumber:[NSNumber numberWithDouble:0.0]] && [addr.longitude isEqualToNumber:[NSNumber numberWithDouble:0.0]] )
+                [addrsvc findCoordsForAddress:addr completion:nil];
+        }
     }
     sectionTitles=[[dataDict allKeys] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
     [self.tableView reloadData];
