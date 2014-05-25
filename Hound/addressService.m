@@ -91,6 +91,30 @@
     return success;
 }
 
+-(void) findCoordsForAddress:(Address *)addr completion:(void (^)(BOOL success))completion
+{
+    NSString *fullAddr=[addr formatSingleline];
+    NSLog(@"Finding coordinates for: %@",fullAddr);
+    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+    [geocoder geocodeAddressString:fullAddr
+                 completionHandler:^(NSArray* placemarks, NSError* error)
+     {
+         BOOL succ=NO;
+         if(placemarks && placemarks.count>0 )
+         {
+             succ=YES;
+             MKPlacemark *placemark = [[MKPlacemark alloc] initWithPlacemark:[placemarks objectAtIndex:0]];
+             NSLog(@"Coordinates are: %f, %f", placemark.coordinate.latitude, placemark.coordinate.longitude);
+             addr.latitude=[NSNumber numberWithDouble:placemark.coordinate.latitude];
+             addr.longitude=[NSNumber numberWithDouble:placemark.coordinate.longitude];
+             [self saveContext];
+         }
+         else NSLog(@"Couldn't find coordinates!");
+         if(completion) completion(succ);
+     }
+     ];
+}
+
 -(MKPointAnnotation *) mapPointAnnotationForAddress:(Address *)addr
 {
     CLLocationCoordinate2D coord=CLLocationCoordinate2DMake([addr.latitude doubleValue],[addr.longitude doubleValue]);

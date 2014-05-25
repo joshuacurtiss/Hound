@@ -31,6 +31,8 @@
 
 -(BOOL) saveContext;
 
+-(void) findCoordsForAddress:(Address *)addr completion:(void (^)(BOOL success))completion;
+
 -(MKPointAnnotation *) mapPointAnnotationForAddress:(Address *)addr;
 
 @end

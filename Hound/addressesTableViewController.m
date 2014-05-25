@@ -110,27 +110,13 @@
     BOOL hasInternet=[util checkInternet];
     if( hasInternet )
     {
-        NSString *fullAddr=[newObj formatSingleline];
-        NSLog(@"Finding coordinates for: %@",fullAddr);
-        CLGeocoder *geocoder = [[CLGeocoder alloc] init];
-        [geocoder geocodeAddressString:fullAddr
-                     completionHandler:^(NSArray* placemarks, NSError* error)
-         {
-             if (placemarks && placemarks.count > 0)
-             {
-                 MKPlacemark *placemark = [[MKPlacemark alloc] initWithPlacemark:[placemarks objectAtIndex:0]];
-                 NSLog(@"Coordinates are: %f, %f", placemark.coordinate.latitude, placemark.coordinate.longitude);
-                 newObj.latitude=[NSNumber numberWithDouble:placemark.coordinate.latitude];
-                 newObj.longitude=[NSNumber numberWithDouble:placemark.coordinate.longitude];
-                 [addrsvc saveContext];
-             }
-             else
-             {
-                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Address not found" message: @"That address could not be found on the map!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-                 [alert show];
-             }
-         }
-         ];
+        [addrsvc findCoordsForAddress:newObj completion:^(BOOL success) {
+            if(!success)
+            {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Address not found" message: @"That address could not be found on the map!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                [alert show];
+            }
+        }];
     }
     [self refreshTable];
     [editVC dismissViewControllerAnimated:YES completion:nil];
