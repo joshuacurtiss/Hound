@@ -34,9 +34,9 @@
     notes.layer.shadowColor = [UIColor lightGrayColor].CGColor;
     if( person!=nil )
     {
-        fname.text=[person valueForKey:@"fname"];
-        lname.text=[person valueForKey:@"lname"];
-        notes.text=[person valueForKey:@"notes"];
+        fname.text=person.fname;
+        lname.text=person.lname;
+        notes.text=person.notes;
     }
     [fname becomeFirstResponder];
 }

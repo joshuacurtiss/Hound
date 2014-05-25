@@ -9,4 +9,6 @@
 #import "Person.h"
 
 @interface Person (Setters)
+-(NSString *) fullName;
+-(NSString *) fullNameLastFirst;
 @end

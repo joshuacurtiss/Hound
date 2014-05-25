@@ -8,21 +8,41 @@
 
 #import "addressDetailViewController.h"
 #import "addressEditViewController.h"
-#import "houndAppDelegate.h"
-#import <CoreLocation/CoreLocation.h>
+#import "Util.h"
+#import "addressService.h"
+#import "Person+Setters.h"
 
 @interface addressDetailViewController ()
+{
+    addressService *addrsvc;
+    Util *util;
+}
 @end
 
 @implementation addressDetailViewController
 
 @synthesize address, mapview, addrText, noteText;
 
+-(id)initWithCoder:(NSCoder *)aDecoder
+{
+    self=[super initWithCoder:aDecoder];
+    if( self )
+    {
+        NSLog(@"Init %@.",self.class);
+        addrsvc=[[addressService alloc] init];
+        util=[[Util alloc] init];
+    }
+    return self;
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
+    if (self)
+    {
+        NSLog(@"Init %@.",self.class);
+        addrsvc=[[addressService alloc] init];
+        util=[[Util alloc] init];
     }
     return self;
 }
@@ -37,14 +57,13 @@
 
 - (void) refreshView
 {
-    NSString *fullName=[NSString stringWithFormat:@"%@ %@",address.person.fname,address.person.lname];
-    self.navigationItem.title=[self formatAddressSingleLine:address];
-    self.addrText.text=[NSString stringWithFormat:@"%@\n%@\n\n",fullName,[self formatAddressMultiline:address]];
+    self.navigationItem.title=[address formatSingleline];
+    self.addrText.text=[NSString stringWithFormat:@"%@\n%@\n\n",[address.person fullName],[address formatMultiline]];
     if( [address.phone length]>0 ) self.addrText.text=[NSString stringWithFormat:@"%@Phone: %@",self.addrText.text,address.phone];
     self.noteText.text=address.notes;
     [mapview removeAnnotations:mapview.annotations];
     CLLocationCoordinate2D coord=CLLocationCoordinate2DMake( [[address valueForKey:@"latitude"] doubleValue], [[address valueForKey:@"longitude"] doubleValue] );
-    [self showClusterPoint:coord withTitle:fullName withSubtitle:[self formatAddressSingleLine:address]];
+    [self showClusterPoint:coord withTitle:[address.person fullName] withSubtitle:[address formatSingleline]];
     mapview.showsUserLocation = YES;
 }
 
@@ -70,42 +89,36 @@
 - (IBAction)unwindToTableViewController:(UIStoryboardSegue *)sender
 {
     NSLog(@"Unwinding to table detail view controller.");
+    Address *addr=address;
     addressEditViewController *editVC = (addressEditViewController *)sender.sourceViewController;
-    NSString *fullAddr=[NSString stringWithFormat:@"%@ %@ %@ %@ %@",editVC.addr1.text,editVC.addr2.text,editVC.city.text,editVC.state.text,editVC.zip.text];
-    NSLog(@"Will be looking for: %@",fullAddr);
-    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
-    [geocoder geocodeAddressString:fullAddr
-                 completionHandler:^(NSArray* placemarks, NSError* error)
-     {
-         if (placemarks && placemarks.count > 0)
+    [addrsvc edit:addr addr1:editVC.addr1.text addr2:editVC.addr2.text city:editVC.city.text state:editVC.state.text zip:editVC.zip.text phone:editVC.phone.text notes:editVC.notes.text person:editVC.person];
+    BOOL hasInternet=[util checkInternet];
+    if( hasInternet )
+    {
+        NSString *fullAddr=[addr formatSingleline];
+        NSLog(@"Finding coordinates for: %@",fullAddr);
+        CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+        [geocoder geocodeAddressString:fullAddr
+                     completionHandler:^(NSArray* placemarks, NSError* error)
          {
-             CLPlacemark *topResult = [placemarks objectAtIndex:0];
-             MKPlacemark *placemark = [[MKPlacemark alloc] initWithPlacemark:topResult];
-             NSLog(@"Coordinates are: %f, %f", placemark.coordinate.longitude, placemark.coordinate.latitude);
-             houndAppDelegate *appDelegate=[[UIApplication sharedApplication] delegate];
-             NSManagedObjectContext *context = [appDelegate managedObjectContext];
-             [address setValue:editVC.addr1.text forKey:@"addr1"];
-             [address setValue:editVC.addr2.text forKey:@"addr2"];
-             [address setValue:editVC.city.text forKey:@"city"];
-             [address setValue:editVC.state.text forKey:@"state"];
-             [address setValue:editVC.zip.text forKey:@"zip"];
-             [address setValue:editVC.phone.text forKey:@"phone"];
-             [address setValue:editVC.notes.text forKey:@"notes"];
-             [address setValue:[NSNumber numberWithDouble:placemark.coordinate.longitude] forKey:@"longitude"];
-             [address setValue:[NSNumber numberWithDouble:placemark.coordinate.latitude] forKey:@"latitude"];
-             address.person=editVC.person;
-             NSError *error=nil;
-             if( ![context save:&error] ) NSLog(@"Save failed! %@ %@",error, [error localizedDescription]);
-             [self refreshView];
-             [editVC dismissViewControllerAnimated:YES completion:nil];
+             if (placemarks && placemarks.count > 0)
+             {
+                 MKPlacemark *placemark = [[MKPlacemark alloc] initWithPlacemark:[placemarks objectAtIndex:0]];
+                 NSLog(@"Coordinates are: %f, %f", placemark.coordinate.latitude, placemark.coordinate.longitude);
+                 addr.latitude=[NSNumber numberWithDouble:placemark.coordinate.latitude];
+                 addr.longitude=[NSNumber numberWithDouble:placemark.coordinate.longitude];
+                 [addrsvc saveContext];
+             }
+             else
+             {
+                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Address not found" message: @"That address could not be found on the map!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                 [alert show];
+             }
          }
-         else
-         {
-             UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Address not found" message: @"That address could not be found on the map!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-             [alert show];
-         }
-     }
-     ];
+         ];
+    }
+    [self refreshView];
+    [editVC dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -116,29 +129,6 @@
         addressEditViewController *vc = [segue destinationViewController];
         vc.address = address;
     }
-}
-
-- (NSString *) formatAddressMultiline:(Address *)addr
-{
-    NSString *out=[NSString stringWithFormat:@"%@\n",[self trimString:addr.addr1]];
-    if( [[self trimString:addr.addr2] length]>0 ) out=[NSString stringWithFormat:@"%@%@\n",out,[self trimString:addr.addr2]];
-    if( [[self trimString:addr.city] length]>0 ) out=[NSString stringWithFormat:@"%@%@",out,[self trimString:addr.city]];
-    if( [[self trimString:addr.state] length]>0 || [[self trimString:addr.zip] length]>0 ) out=[NSString stringWithFormat:@"%@, %@",out,[self trimString:[NSString stringWithFormat:@"%@ %@",addr.state,addr.zip]]];
-    return out;
-}
-
-- (NSString *) formatAddressSingleLine:(Address *)addr
-{
-    NSString *out=[self trimString:addr.addr1];
-    if( [[self trimString:addr.addr2] length]>0 ) out=[NSString stringWithFormat:@"%@ %@",out,[self trimString:addr.addr2]];
-    if( [[self trimString:addr.city] length]>0 ) out=[NSString stringWithFormat:@"%@, %@",out,[self trimString:addr.city]];
-    if( [[self trimString:addr.state] length]>0 || [[self trimString:addr.zip] length]>0 ) out=[NSString stringWithFormat:@"%@, %@",out,[self trimString:[NSString stringWithFormat:@"%@ %@",addr.state,addr.zip]]];
-    return out;
-}
-
-- (NSString *) trimString:(NSString *)str
-{
-    return [str stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
 }
 
 @end

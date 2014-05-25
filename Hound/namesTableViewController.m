@@ -9,24 +9,36 @@
 #import "namesTableViewController.h"
 #import "personEditViewController.h"
 #import "detailViewController.h"
-#import "houndAppDelegate.h"
+#import "personService.h"
 
 @interface namesTableViewController ()
 {
     NSMutableDictionary *dataDict;
     NSArray *sectionTitles;
     Person *myNewPerson;
+    personService *personsvc;
 }
 @end
 
 @implementation namesTableViewController
 @synthesize data;
 
+-(id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if (self)
+    {
+        personsvc=[[personService alloc] init];
+    }
+    return self;
+}
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
+    if (self)
+    {
+        personsvc=[[personService alloc] init];
     }
     return self;
 }
@@ -46,15 +58,7 @@
 - (void) refreshTable
 {
     NSLog(@"Reloading data and refreshing the table.");
-    houndAppDelegate *appDelegate=[[UIApplication sharedApplication] delegate];
-    NSManagedObjectContext *context = [appDelegate managedObjectContext];
-    NSEntityDescription *entityDesc = [NSEntityDescription entityForName:@"Person" inManagedObjectContext:context];
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    [request setEntity:entityDesc];
-    [request setSortDescriptors:[NSArray arrayWithObjects:[NSSortDescriptor sortDescriptorWithKey:@"lname" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)],
-                                 [NSSortDescriptor sortDescriptorWithKey:@"fname" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)], nil]];
-    NSError *error;
-    data=[[context executeFetchRequest:request error:&error] mutableCopy];
+    data=[[personsvc fetchWithSort:[NSArray arrayWithObjects:@"lname",@"fname", nil]] mutableCopy];
     dataDict=[[NSMutableDictionary alloc] init];
     for( int i=0 ; i<data.count ; i++ )
     {
@@ -100,7 +104,7 @@
     if( cell==nil )
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     Person *person=sec[indexPath.row];
-    cell.textLabel.text=[NSString stringWithFormat:@"%@, %@", person.lname, person.fname];
+    cell.textLabel.text=[person fullNameLastFirst];
     return cell;
 }
 
@@ -111,16 +115,8 @@
     NSString *newname = [NSString stringWithFormat:@"%@ %@",editVC.fname.text,editVC.lname.text] ;
     if( ![newname length]==0 && ![[newname stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] length]==0 )
     {
-        houndAppDelegate *appDelegate=[[UIApplication sharedApplication] delegate];
-        NSManagedObjectContext *context = [appDelegate managedObjectContext];
-        Person *newPerson;
-        newPerson=[NSEntityDescription insertNewObjectForEntityForName:@"Person" inManagedObjectContext:context];
-        newPerson.fname=editVC.fname.text;
-        newPerson.lname=editVC.lname.text;
-        [newPerson setValue:editVC.notes.text forKey:@"notes"];
-        NSError *error=nil;
-        if( ![context save:&error] ) NSLog(@"Save failed! %@ %@",error, [error localizedDescription]);
-        myNewPerson=(Person *)newPerson;
+        Person *newPerson=[personsvc edit:nil firstName:editVC.fname.text lastName:editVC.lname.text notes:editVC.notes.text];
+        myNewPerson=newPerson;
     }
     [self refreshTable];
     [editVC dismissViewControllerAnimated:YES completion:^
@@ -142,20 +138,12 @@
 
 - (void) tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    houndAppDelegate *appDelegate=[[UIApplication sharedApplication] delegate];
-    NSManagedObjectContext *context = [appDelegate managedObjectContext];
     if( editingStyle==UITableViewCellEditingStyleDelete )
     {
         NSString *secTitle=sectionTitles[indexPath.section];
         NSArray *sec=dataDict[secTitle];
         Person *p=sec[indexPath.row];
-        [context deleteObject:p];
-        NSError *error=nil;
-        if(![context save:&error] )
-        {
-            NSLog(@"Can't delete! %@ %@",error, [error localizedDescription]);
-            return;
-        }
+        [personsvc del:p];
         [dataDict[secTitle] removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }

@@ -22,4 +22,17 @@
     [self didChangeValueForKey:key];
 }
 
+-(NSString *) fullName
+{
+    NSString *fullname=[NSString stringWithFormat:@"%@ %@",self.fname,self.lname];
+    return [fullname stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+}
+
+-(NSString *) fullNameLastFirst
+{
+    NSString *fullname=[NSString stringWithFormat:@"%@, %@",self.lname,self.fname];
+    if( self.fname.length==0 ) fullname=self.lname;
+    return [fullname stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+}
+
 @end

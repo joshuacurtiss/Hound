@@ -23,4 +23,28 @@
     [self didChangeValueForKey:key];
 }
 
+- (NSString *) formatMultiline
+{
+    NSString *out=[NSString stringWithFormat:@"%@\n",[self trimString:self.addr1]];
+    if( [[self trimString:self.addr2] length]>0 ) out=[NSString stringWithFormat:@"%@%@\n",out,[self trimString:self.addr2]];
+    if( [[self trimString:self.city] length]>0 ) out=[NSString stringWithFormat:@"%@%@",out,[self trimString:self.city]];
+    if( [[self trimString:self.state] length]>0 || [[self trimString:self.zip] length]>0 )
+        out=[NSString stringWithFormat:@"%@, %@",out,[self trimString:[NSString stringWithFormat:@"%@ %@",self.state,self.zip]]];
+    return out;
+}
+
+- (NSString *) formatSingleline
+{
+    NSString *out=[self trimString:self.addr1];
+    if( [[self trimString:self.addr2] length]>0 ) out=[NSString stringWithFormat:@"%@ %@",out,[self trimString:self.addr2]];
+    if( [[self trimString:self.city] length]>0 ) out=[NSString stringWithFormat:@"%@, %@",out,[self trimString:self.city]];
+    if( [[self trimString:self.state] length]>0 || [[self trimString:self.zip] length]>0 ) out=[NSString stringWithFormat:@"%@, %@",out,[self trimString:[NSString stringWithFormat:@"%@ %@",self.state,self.zip]]];
+    return out;
+}
+
+- (NSString *) trimString:(NSString *)str
+{
+    return [str stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+}
+
 @end

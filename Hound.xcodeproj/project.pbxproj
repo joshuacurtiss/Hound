@@ -20,6 +20,7 @@
 		0333E1AA191201730057DCC3 /* addressEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0333E1A9191201730057DCC3 /* addressEditViewController.m */; };
 		0333E1AD191202740057DCC3 /* Address.m in Sources */ = {isa = PBXBuildFile; fileRef = 0333E1AC191202740057DCC3 /* Address.m */; };
 		033706FB19252F640033E1B8 /* Person+Setters.m in Sources */ = {isa = PBXBuildFile; fileRef = 033706FA19252F640033E1B8 /* Person+Setters.m */; };
+		03662D001929820B0066EFA0 /* addressService.m in Sources */ = {isa = PBXBuildFile; fileRef = 03662CFF1929820B0066EFA0 /* addressService.m */; };
 		036C6FFE190F51CF00856637 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 036C6FFD190F51CF00856637 /* Foundation.framework */; };
 		036C7000190F51CF00856637 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 036C6FFF190F51CF00856637 /* CoreGraphics.framework */; };
 		036C7002190F51CF00856637 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 036C7001190F51CF00856637 /* UIKit.framework */; };
@@ -36,8 +37,10 @@
 		036C7027190F51CF00856637 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 036C7025190F51CF00856637 /* InfoPlist.strings */; };
 		036C7029190F51CF00856637 /* HoundTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 036C7028190F51CF00856637 /* HoundTests.m */; };
 		036C7033190F51DD00856637 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 036C7032190F51DD00856637 /* Main.storyboard */; };
+		037B28A3193118360050E0BA /* personService.m in Sources */ = {isa = PBXBuildFile; fileRef = 037B28A2193118360050E0BA /* personService.m */; };
 		03877A561915EF1000F69FF7 /* map2.png in Resources */ = {isa = PBXBuildFile; fileRef = 03877A551915EF1000F69FF7 /* map2.png */; };
 		03877A591915F21E00F69FF7 /* mapLookupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03877A581915F21E00F69FF7 /* mapLookupViewController.m */; };
+		038D2FE41930EE9C00895DB7 /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 038D2FE31930EE9C00895DB7 /* Util.m */; };
 		03A0C6861914B9220043EF9B /* namePopoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03A0C6851914B9220043EF9B /* namePopoverViewController.m */; };
 		03BB39F31911AE850057A961 /* near-me.png in Resources */ = {isa = PBXBuildFile; fileRef = 03BB39F11911AE850057A961 /* near-me.png */; };
 		03BB39F41911AE850057A961 /* trash.png in Resources */ = {isa = PBXBuildFile; fileRef = 03BB39F21911AE850057A961 /* trash.png */; };
@@ -83,6 +86,8 @@
 		0333E1AC191202740057DCC3 /* Address.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Address.m; sourceTree = "<group>"; };
 		033706F919252F640033E1B8 /* Person+Setters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Person+Setters.h"; sourceTree = "<group>"; };
 		033706FA19252F640033E1B8 /* Person+Setters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Person+Setters.m"; sourceTree = "<group>"; };
+		03662CFE1929820B0066EFA0 /* addressService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = addressService.h; sourceTree = "<group>"; };
+		03662CFF1929820B0066EFA0 /* addressService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = addressService.m; sourceTree = "<group>"; };
 		036C6FFA190F51CF00856637 /* Hound.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hound.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		036C6FFD190F51CF00856637 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		036C6FFF190F51CF00856637 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -102,9 +107,13 @@
 		036C7026190F51CF00856637 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		036C7028190F51CF00856637 /* HoundTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HoundTests.m; sourceTree = "<group>"; };
 		036C7032190F51DD00856637 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = ../Main.storyboard; sourceTree = "<group>"; };
+		037B28A1193118360050E0BA /* personService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = personService.h; sourceTree = "<group>"; };
+		037B28A2193118360050E0BA /* personService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = personService.m; sourceTree = "<group>"; };
 		03877A551915EF1000F69FF7 /* map2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map2.png; sourceTree = "<group>"; };
 		03877A571915F21E00F69FF7 /* mapLookupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mapLookupViewController.h; sourceTree = "<group>"; };
 		03877A581915F21E00F69FF7 /* mapLookupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = mapLookupViewController.m; sourceTree = "<group>"; };
+		038D2FE21930EE9C00895DB7 /* Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Util.h; sourceTree = "<group>"; };
+		038D2FE31930EE9C00895DB7 /* Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Util.m; sourceTree = "<group>"; };
 		03A0C6841914B9220043EF9B /* namePopoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = namePopoverViewController.h; sourceTree = "<group>"; };
 		03A0C6851914B9220043EF9B /* namePopoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = namePopoverViewController.m; sourceTree = "<group>"; };
 		03BB39F11911AE850057A961 /* near-me.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "near-me.png"; sourceTree = "<group>"; };
@@ -159,6 +168,8 @@
 				033219C0190F6D6D00998CC3 /* personEditViewController.m */,
 				033219CE190F861A00998CC3 /* detailViewController.h */,
 				033219CF190F861A00998CC3 /* detailViewController.m */,
+				037B28A1193118360050E0BA /* personService.h */,
+				037B28A2193118360050E0BA /* personService.m */,
 			);
 			name = Person;
 			sourceTree = "<group>";
@@ -174,6 +185,8 @@
 				0325DBC819133B4100921A22 /* addressDetailViewController.m */,
 				03A0C6841914B9220043EF9B /* namePopoverViewController.h */,
 				03A0C6851914B9220043EF9B /* namePopoverViewController.m */,
+				03662CFE1929820B0066EFA0 /* addressService.h */,
+				03662CFF1929820B0066EFA0 /* addressService.m */,
 			);
 			name = Address;
 			sourceTree = "<group>";
@@ -245,6 +258,8 @@
 				036C700F190F51CF00856637 /* houndAppDelegate.m */,
 				395CC518191840A600328E0F /* helpViewController.h */,
 				395CC519191840A600328E0F /* helpViewController.m */,
+				038D2FE21930EE9C00895DB7 /* Util.h */,
+				038D2FE31930EE9C00895DB7 /* Util.m */,
 				0325DBC619133AF600921A22 /* Address */,
 				0325DBC519133AEF00921A22 /* Person */,
 				0325DBCB19133B8A00921A22 /* Map */,
@@ -425,6 +440,7 @@
 			files = (
 				0325DBC919133B4100921A22 /* addressDetailViewController.m in Sources */,
 				036C700C190F51CF00856637 /* main.m in Sources */,
+				03662D001929820B0066EFA0 /* addressService.m in Sources */,
 				033219CA190F786500998CC3 /* namesTableViewController.m in Sources */,
 				0333E1AD191202740057DCC3 /* Address.m in Sources */,
 				033219C1190F6D6D00998CC3 /* personEditViewController.m in Sources */,
@@ -439,6 +455,8 @@
 				03A0C6861914B9220043EF9B /* namePopoverViewController.m in Sources */,
 				033219CD190F787300998CC3 /* addressesTableViewController.m in Sources */,
 				036C7013190F51CF00856637 /* Hound.xcdatamodeld in Sources */,
+				038D2FE41930EE9C00895DB7 /* Util.m in Sources */,
+				037B28A3193118360050E0BA /* personService.m in Sources */,
 				0333E1AA191201730057DCC3 /* addressEditViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

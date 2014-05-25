@@ -7,20 +7,37 @@
 //
 
 #import "mapViewController.h"
-#import "houndAppDelegate.h"
+#import "addressService.h"
+#import "Address+Setters.h"
+#import "Person+Setters.h"
 
 @interface mapViewController () <MKMapViewDelegate>
-
+{
+    addressService *addrsvc;
+}
 @end
 
 @implementation mapViewController
 @synthesize mapview;
 
+-(id)initWithCoder:(NSCoder *)aDecoder
+{
+    self=[super initWithCoder:aDecoder];
+    if (self)
+    {
+        NSLog(@"Init %@.",self.class);
+        addrsvc=[[addressService alloc] init];
+    }
+    return self;
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
+    if (self)
+    {
+        NSLog(@"Init %@.",self.class);
+        addrsvc=[[addressService alloc] init];
     }
     return self;
 }
@@ -38,21 +55,13 @@
 
 - (void) pinAllAddresses
 {
-    houndAppDelegate *appDelegate=[[UIApplication sharedApplication] delegate];
-    NSManagedObjectContext *context = [appDelegate managedObjectContext];
-    NSEntityDescription *entityDesc = [NSEntityDescription entityForName:@"Address" inManagedObjectContext:context];
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    [request setEntity:entityDesc];
-    NSError *error;
-    NSArray *data=[[context executeFetchRequest:request error:&error] mutableCopy];
+    NSArray *data=[addrsvc fetch];
     [mapview removeAnnotations:mapview.annotations];
     for( int i=0 ; i<[data count] ; i++ )
     {
         Address *address=[data objectAtIndex:i];
-        NSString *fullAddr=[self formatAddress:address];
-        NSString *fullName=[NSString stringWithFormat:@"%@ %@",address.person.fname,address.person.lname];
         CLLocationCoordinate2D coord=CLLocationCoordinate2DMake( [[address valueForKey:@"latitude"] doubleValue], [[address valueForKey:@"longitude"] doubleValue] );
-        [self pinClusterPoint:coord withTitle:fullName withSubTitle:fullAddr];
+        [self pinClusterPoint:coord withTitle:[address.person fullName] withSubTitle:[address formatSingleline]];
     }
 }
 
@@ -102,20 +111,6 @@
     [mapview setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
     MKCoordinateRegion region=MKCoordinateRegionMakeWithDistance(self.mapview.userLocation.coordinate, 4000, 4000);
     [mapview setRegion:region animated:YES];
-}
-
-- (NSString *) formatAddress:(Address *)addr
-{
-    NSString *out=[self trimString:addr.addr1];
-    if( [[self trimString:addr.addr2] length]>0 ) out=[NSString stringWithFormat:@"%@ %@",out,[self trimString:addr.addr2]];
-    if( [[self trimString:addr.city] length]>0 ) out=[NSString stringWithFormat:@"%@, %@",out,[self trimString:addr.city]];
-    if( [[self trimString:addr.state] length]>0 || [[self trimString:addr.zip] length]>0 ) out=[NSString stringWithFormat:@"%@, %@",out,[self trimString:[NSString stringWithFormat:@"%@ %@",addr.state,addr.zip]]];
-    return out;
-}
-
-- (NSString *) trimString:(NSString *)str
-{
-    return [str stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
 }
 
 @end

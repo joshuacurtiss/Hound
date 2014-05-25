@@ -9,5 +9,6 @@
 #import "Address.h"
 
 @interface Address (Setters)
-
+- (NSString *) formatSingleline;
+- (NSString *) formatMultiline;
 @end

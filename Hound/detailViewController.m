@@ -10,20 +10,45 @@
 #import "personEditViewController.h"
 #import "addressEditViewController.h"
 #import "addressDetailViewController.h"
-#import "houndAppDelegate.h"
+#import "addressService.h"
+#import "personService.h"
+#import "Person+Setters.h"
+#import "Util.h"
 
 @interface detailViewController ()
+{
+    addressService *addrsvc;
+    personService *personsvc;
+    Util *util;
+}
 @end
 
 @implementation detailViewController
 
 @synthesize person, notes, addresses, tableView;
 
+-(id)initWithCoder:(NSCoder *)aDecoder
+{
+    self=[super initWithCoder:aDecoder];
+    if( self )
+    {
+        NSLog(@"Init %@.",self.class);
+        addrsvc=[[addressService alloc] init];
+        personsvc=[[personService alloc] init];
+        util=[[Util alloc] init];
+    }
+    return self;
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
+    if (self)
+    {
+        NSLog(@"Init %@.",self.class);
+        addrsvc=[[addressService alloc] init];
+        personsvc=[[personService alloc] init];
+        util=[[Util alloc] init];
     }
     return self;
 }
@@ -45,8 +70,7 @@
 
 - (void) refreshView
 {
-    NSString *fullName=[NSString stringWithFormat:@"%@ %@",[person valueForKey:@"fname"],[person valueForKey:@"lname"]];
-    self.navigationItem.title=fullName;
+    self.navigationItem.title=[person fullName];
     notes.text=person.notes;
     addresses=[NSMutableArray arrayWithObjects:nil];
     for( id item in person.addresses )
@@ -71,13 +95,7 @@
         NSString *newname = [NSString stringWithFormat:@"%@ %@",editVC.fname.text,editVC.lname.text] ;
         if( ![newname length]==0 && ![[newname stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] length]==0 )
         {
-            houndAppDelegate *appDelegate=[[UIApplication sharedApplication] delegate];
-            NSManagedObjectContext *context = [appDelegate managedObjectContext];
-            [person setValue:editVC.fname.text forKey:@"fname"];
-            [person setValue:editVC.lname.text forKey:@"lname"];
-            [person setValue:editVC.notes.text forKey:@"notes"];
-            NSError *error=nil;
-            if( ![context save:&error] ) NSLog(@"Save failed! %@ %@",error, [error localizedDescription]);
+            [personsvc edit:person firstName:editVC.fname.text lastName:editVC.lname.text notes:editVC.notes.text];
         }
         [self refreshView];
         [editVC dismissViewControllerAnimated:YES completion:nil];
@@ -85,43 +103,34 @@
     else if( [sourceClass isEqualToString:@"addressEditViewController"] )
     {
         addressEditViewController *editVC = (addressEditViewController *)sender.sourceViewController;
-        NSString *fullAddr=[NSString stringWithFormat:@"%@ %@ %@ %@ %@",editVC.addr1.text,editVC.addr2.text,editVC.city.text,editVC.state.text,editVC.zip.text];
-        NSLog(@"Will be looking for: %@",fullAddr);
-        CLGeocoder *geocoder = [[CLGeocoder alloc] init];
-        [geocoder geocodeAddressString:fullAddr
-                     completionHandler:^(NSArray* placemarks, NSError* error)
-         {
-             if (placemarks && placemarks.count > 0)
+        Address *newObj=[addrsvc edit:nil addr1:editVC.addr1.text addr2:editVC.addr2.text city:editVC.city.text state:editVC.state.text zip:editVC.zip.text phone:editVC.phone.text notes:editVC.notes.text person:editVC.person];
+        BOOL hasInternet=[util checkInternet];
+        if( hasInternet )
+        {
+            NSString *fullAddr=[newObj formatSingleline];
+            NSLog(@"Will be looking for: %@",fullAddr);
+            CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+            [geocoder geocodeAddressString:fullAddr
+                         completionHandler:^(NSArray* placemarks, NSError* error)
              {
-                 CLPlacemark *topResult = [placemarks objectAtIndex:0];
-                 MKPlacemark *placemark = [[MKPlacemark alloc] initWithPlacemark:topResult];
-                 NSLog(@"Coordinates are: %f, %f", placemark.coordinate.longitude, placemark.coordinate.latitude);
-                 houndAppDelegate *appDelegate=[[UIApplication sharedApplication] delegate];
-                 NSManagedObjectContext *context = [appDelegate managedObjectContext];
-                 Address *newObj;
-                 newObj=[NSEntityDescription insertNewObjectForEntityForName:@"Address" inManagedObjectContext:context];
-                 [newObj setValue:editVC.addr1.text forKey:@"addr1"];
-                 [newObj setValue:editVC.addr2.text forKey:@"addr2"];
-                 [newObj setValue:editVC.city.text forKey:@"city"];
-                 [newObj setValue:editVC.state.text forKey:@"state"];
-                 [newObj setValue:editVC.zip.text forKey:@"zip"];
-                 [newObj setValue:editVC.phone.text forKey:@"phone"];
-                 [newObj setValue:editVC.notes.text forKey:@"notes"];
-                 [newObj setValue:[NSNumber numberWithDouble:placemark.coordinate.longitude] forKey:@"longitude"];
-                 [newObj setValue:[NSNumber numberWithDouble:placemark.coordinate.latitude] forKey:@"latitude"];
-                 newObj.person=editVC.person;
-                 NSError *error=nil;
-                 if( ![context save:&error] ) NSLog(@"Save failed! %@ %@",error, [error localizedDescription]);
-                 [self refreshView];
-                 [editVC dismissViewControllerAnimated:YES completion:nil];
+                 if (placemarks && placemarks.count > 0)
+                 {
+                     MKPlacemark *placemark = [[MKPlacemark alloc] initWithPlacemark:[placemarks objectAtIndex:0]];
+                     NSLog(@"Coordinates are: %f, %f", placemark.coordinate.longitude, placemark.coordinate.latitude);
+                     newObj.latitude=[NSNumber numberWithDouble:placemark.coordinate.latitude];
+                     newObj.longitude=[NSNumber numberWithDouble:placemark.coordinate.longitude];
+                     [addrsvc saveContext];
+                 }
+                 else
+                 {
+                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Address not found" message: @"That address could not be found on the map!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                     [alert show];
+                 }
              }
-             else
-             {
-                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"Address not found" message: @"That address could not be found on the map!" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-                 [alert show];
-             }
-         }
-         ];
+             ];
+        }
+        [self refreshView];
+        [editVC dismissViewControllerAnimated:YES completion:nil];
     }
     else
     {
@@ -172,40 +181,18 @@
     if( cell==nil )
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
     Address *obj=[addresses objectAtIndex:indexPath.row];
-    cell.textLabel.text=[self formatAddress:obj];
+    cell.textLabel.text=[obj formatSingleline];
     return cell;
 }
 
 - (void) tableView:(UITableView *)tview commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    houndAppDelegate *appDelegate=[[UIApplication sharedApplication] delegate];
-    NSManagedObjectContext *context = [appDelegate managedObjectContext];
     if( editingStyle==UITableViewCellEditingStyleDelete )
     {
-        [context deleteObject:[addresses objectAtIndex:indexPath.row]];
-        NSError *error=nil;
-        if(![context save:&error] )
-        {
-            NSLog(@"Can't delete! %@ %@",error, [error localizedDescription]);
-            return;
-        }
+        [addrsvc del:[addresses objectAtIndex:indexPath.row]];
         [addresses removeObjectAtIndex:indexPath.row];
         [tview deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }
-}
-
-- (NSString *) formatAddress:(Address *)addr
-{
-    NSString *out=[self trimString:addr.addr1];
-    if( [[self trimString:addr.addr2] length]>0 ) out=[NSString stringWithFormat:@"%@ %@",out,[self trimString:addr.addr2]];
-    if( [[self trimString:addr.city] length]>0 ) out=[NSString stringWithFormat:@"%@, %@",out,[self trimString:addr.city]];
-    if( [[self trimString:addr.state] length]>0 || [[self trimString:addr.zip] length]>0 ) out=[NSString stringWithFormat:@"%@, %@",out,[self trimString:[NSString stringWithFormat:@"%@ %@",addr.state,addr.zip]]];
-    return out;
-}
-
-- (NSString *) trimString:(NSString *)str
-{
-    return [str stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
 }
 
 @end

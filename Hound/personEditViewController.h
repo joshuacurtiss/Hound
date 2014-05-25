@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Person+Setters.h"
 
 @interface personEditViewController : UIViewController <UITextFieldDelegate>
 - (IBAction)cancel:(id)sender;
 @property (strong, nonatomic) IBOutlet UITextField *fname;
 @property (strong, nonatomic) IBOutlet UITextField *lname;
 @property (strong, nonatomic) IBOutlet UITextView *notes;
-@property (strong) NSManagedObject *person;
+@property (strong) Person *person;
 @end

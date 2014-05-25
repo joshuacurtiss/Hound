@@ -7,20 +7,34 @@
 //
 
 #import "namePopoverViewController.h"
-#import "houndAppDelegate.h"
+#import "personService.h"
 #import "addressEditViewController.h"
 
 @interface namePopoverViewController ()
+{
+    personService *personsvc;
+}
 @end
 
 @implementation namePopoverViewController
 @synthesize data;
 
+- (instancetype)initWithCoder:(NSCoder *)coder
+{
+    self = [super initWithCoder:coder];
+    if (self)
+    {
+        personsvc=[[personService alloc] init];
+    }
+    return self;
+}
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
+    if (self)
+    {
+        personsvc=[[personService alloc] init];
     }
     return self;
 }
@@ -40,15 +54,7 @@
 - (void) refreshTable
 {
     NSLog(@"Reloading data and refreshing the table.");
-    houndAppDelegate *appDelegate=[[UIApplication sharedApplication] delegate];
-    NSManagedObjectContext *context = [appDelegate managedObjectContext];
-    NSEntityDescription *entityDesc = [NSEntityDescription entityForName:@"Person" inManagedObjectContext:context];
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    [request setEntity:entityDesc];
-    [request setSortDescriptors:[NSArray arrayWithObjects:[NSSortDescriptor sortDescriptorWithKey:@"lname" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)],
-                                 [NSSortDescriptor sortDescriptorWithKey:@"fname" ascending:YES selector:@selector(localizedCaseInsensitiveCompare:)], nil]];
-    NSError *error;
-    data=[[context executeFetchRequest:request error:&error] mutableCopy];
+    data=[[personsvc fetchWithSort:[NSArray arrayWithObjects:@"lname",@"fname",nil]] mutableCopy];
     [self.tableView reloadData];
 }
 
@@ -70,8 +76,8 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if( cell==nil )
         cell=[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-    NSManagedObject *person=[data objectAtIndex:indexPath.row];
-    cell.textLabel.text=[NSString stringWithFormat:@"%@, %@", [person valueForKey:@"lname"], [person valueForKey:@"fname"]];
+    Person *person=[data objectAtIndex:indexPath.row];
+    cell.textLabel.text=[person fullNameLastFirst];
     return cell;
 }
 
