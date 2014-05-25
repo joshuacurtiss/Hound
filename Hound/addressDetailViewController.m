@@ -57,13 +57,14 @@
 
 - (void) refreshView
 {
+    NSString *fullname=[address.person fullName];
+    if( fullname==nil ) fullname=@"No name provided";
     self.navigationItem.title=[address formatSingleline];
-    self.addrText.text=[NSString stringWithFormat:@"%@\n%@\n\n",[address.person fullName],[address formatMultiline]];
+    self.addrText.text=[NSString stringWithFormat:@"%@\n%@\n\n",fullname,[address formatMultiline]];
     if( [address.phone length]>0 ) self.addrText.text=[NSString stringWithFormat:@"%@Phone: %@",self.addrText.text,address.phone];
     self.noteText.text=address.notes;
     [mapview removeAnnotations:mapview.annotations];
-    CLLocationCoordinate2D coord=CLLocationCoordinate2DMake( [[address valueForKey:@"latitude"] doubleValue], [[address valueForKey:@"longitude"] doubleValue] );
-    [self showClusterPoint:coord withTitle:[address.person fullName] withSubtitle:[address formatSingleline]];
+    [self showPoint:[addrsvc mapPointAnnotationForAddress:address]];
     mapview.showsUserLocation = YES;
 }
 
@@ -73,17 +74,12 @@
     // Dispose of any resources that can be recreated.
 }
 
--(MKPointAnnotation *)showClusterPoint:(CLLocationCoordinate2D)coords withTitle:(NSString *)title withSubtitle:(NSString *)subtitle
+-(void)showPoint:(MKPointAnnotation *)point
 {
-    float  zoomLevel = 0.03;
-    MKCoordinateRegion region = MKCoordinateRegionMake (coords, MKCoordinateSpanMake (zoomLevel, zoomLevel));
+    float zoomLevel=0.03;
+    MKCoordinateRegion region=MKCoordinateRegionMake(point.coordinate, MKCoordinateSpanMake(zoomLevel,zoomLevel));
     [mapview setRegion: [mapview regionThatFits: region] animated: YES];
-    MKPointAnnotation *point = [[MKPointAnnotation alloc]init];
-    point.coordinate = coords;
-    point.title=title;
-    point.subtitle=subtitle;
     [mapview addAnnotation:point];
-    return point;
 }
 
 - (IBAction)unwindToTableViewController:(UIStoryboardSegue *)sender

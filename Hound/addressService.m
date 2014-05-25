@@ -8,6 +8,7 @@
 
 #import "addressService.h"
 #import "houndAppDelegate.h"
+#import "Person+Setters.h"
 
 @interface addressService()
 {
@@ -88,6 +89,18 @@
     BOOL success=[context save:&error];
     if( !success ) NSLog(@"Save failed! %@ %@", error, [error localizedDescription]);
     return success;
+}
+
+-(MKPointAnnotation *) mapPointAnnotationForAddress:(Address *)addr
+{
+    CLLocationCoordinate2D coord=CLLocationCoordinate2DMake([addr.latitude doubleValue],[addr.longitude doubleValue]);
+    MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
+    NSString *personName=[addr.person fullName];
+    if( personName==nil ) personName=@"No Name";
+    point.coordinate=coord;
+    point.title=personName;
+    point.subtitle=[addr formatSingleline];
+    return point;
 }
 
 @end

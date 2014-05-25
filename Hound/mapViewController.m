@@ -60,20 +60,12 @@
     for( int i=0 ; i<[data count] ; i++ )
     {
         Address *address=[data objectAtIndex:i];
-        CLLocationCoordinate2D coord=CLLocationCoordinate2DMake( [[address valueForKey:@"latitude"] doubleValue], [[address valueForKey:@"longitude"] doubleValue] );
-        [self pinClusterPoint:coord withTitle:[address.person fullName] withSubTitle:[address formatSingleline]];
+        if( [address.latitude doubleValue]!=0.0 && [address.longitude doubleValue]!=0.0 )
+        {
+            NSLog(@"Pinning %@, %@", address.latitude, address.longitude);
+            [mapview addAnnotation:[addrsvc mapPointAnnotationForAddress:address]];
+        }
     }
-}
-
--(MKPointAnnotation *)pinClusterPoint:(CLLocationCoordinate2D)coords withTitle:(NSString *)title withSubTitle:(NSString *)subtitle
-{
-    MKPointAnnotation *point = [[MKPointAnnotation alloc]init];
-    point.coordinate = coords;
-    point.title=title;
-    point.subtitle=subtitle;
-    [mapview addAnnotation:point];
-    NSLog(@"Pinned %f, %f", point.coordinate.longitude, point.coordinate.latitude);
-    return point;
 }
 
 - (void)didReceiveMemoryWarning

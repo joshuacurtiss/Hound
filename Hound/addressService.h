@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <MapKit/MapKit.h>
 #import "Address+Setters.h"
 
 @interface addressService : NSObject
@@ -29,5 +30,7 @@
            person:(Person *)person;
 
 -(BOOL) saveContext;
+
+-(MKPointAnnotation *) mapPointAnnotationForAddress:(Address *)addr;
 
 @end
