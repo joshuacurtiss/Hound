@@ -16,4 +16,5 @@
 @property (strong, nonatomic) IBOutlet UITextView *noteText;
 @property (strong) Address *address;
 @property (strong, nonatomic) IBOutlet MKMapView *mapview;
+- (IBAction)setMap:(id)sender;
 @end
